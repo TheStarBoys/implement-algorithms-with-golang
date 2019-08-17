@@ -1,34 +1,18 @@
 package leetcode
 
+import "math"
+
 func maxSubArray(nums []int) int {
-	// 时间复杂度太高，不可取
-	if len(nums) == 0 {
+	if nums == nil || len(nums) == 0 {
 		return 0
 	}
-	// result set
-	set := []int{}
-	for i, v := range nums {
-		count := 1
-		for count <= len(nums) {
-			sum := v
-			for j := i+1; j < count; j++ {
-				sum += nums[j]
-			}
-			count++
-			set = append(set, sum)
-		}
+	preSum := nums[0]
+	maxSum := preSum
+	for i := 1; i < len(nums); i++ {
+		if preSum > 0 {
+			preSum += nums[i]
+		}else { preSum = nums[i] }
+		maxSum = int(math.Max(float64(preSum), float64(maxSum)))
 	}
-	max := set[0]
-	for _, v := range set {
-		if v > max {
-			max = v
-		}
-	}
-	return max
-}
-//func maxSubArray(nums []int) int {
-//
-//}
-func MaxSubArray(nums []int) int {
-	return maxSubArray(nums)
+	return maxSum
 }
