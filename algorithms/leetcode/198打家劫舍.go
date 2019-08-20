@@ -1,10 +1,6 @@
-package main
+package leetcode
 
 import "math"
-
-func main() {
-	rob([]int{2,1,1,2})
-}
 
 func rob(nums []int) int {
 	pre2, pre1 := 0, 0
