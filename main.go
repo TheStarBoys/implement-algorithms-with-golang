@@ -1,16 +1,12 @@
 package main
 
-import "math"
+import (
+	"fmt"
+	j "github.com/TheStarBoys/implement-data-structures-and-algorithms-with-golang/algorithms/tag/jsonHandle"
+)
 
 func main() {
-	rob([]int{2,1,1,2})
+	json := `{"code":0,"message":"","data":[{"account_id":"1008958616510007","balance":580500,"available_balance":580500,"frozen_balance":0,"unconfirmed_balance":0,"currency":"BTC"}]}`
+	fmt.Println(j.CompareJson([]byte(json), []byte(json)))
 }
 
-func rob(nums []int) int {
-	pre2, pre1 := 0, 0
-	for i := 0; i < len(nums); i++{
-		cur := int(math.Max(float64(pre2 + nums[i]), float64(pre1)))
-		pre2, pre1 = pre1, cur
-	}
-	return pre1
-}
