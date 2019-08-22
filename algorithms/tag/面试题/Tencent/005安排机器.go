@@ -1,3 +1,6 @@
+package Tencent
+
+/*
 package main
 import (
 	"fmt"
@@ -11,7 +14,7 @@ type machine struct {
 	time int
 	level int
 }
-/*
+
 测试用例：
 4 3
 435 76
@@ -21,7 +24,7 @@ type machine struct {
 587 38
 862 57
 753 46
-*/
+
 func main() {
 	n, m := 0, 0
 	fmt.Scanf("%d %d", &n, &m)
@@ -70,3 +73,5 @@ func arrange(n, m int, macs []machine, tsks []task) (int, int) {
 func income(x, y int) int {
 	return 200 * x + 3 * y
 }
+
+*/

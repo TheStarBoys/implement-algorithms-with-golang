@@ -44,7 +44,6 @@ func CompareJsonMap(d1, d2 interface{}) bool {
 	return true
 }
 
-
 func compareMap(m1, m2 map[string]interface{}) bool {
 	for k, v := range m1 {
 		if reflect.ValueOf(v).Kind() == reflect.Map {
