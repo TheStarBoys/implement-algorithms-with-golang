@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 /*
@@ -14,24 +13,44 @@ import (
 3 5 3
  */
 func main() {
-	nums := []int{1, -1}
-	fmt.Println(maxSlidingWindow(nums, 1))
+	fmt.Println(findKthNumber(2, 3, 6))
+	//fmt.Println(count(4, 2, 3, 6))
 }
-func maxSlidingWindow(nums []int, k int) []int {
-	maxs := []int{}
-	for i := range nums {
-		if i + k > len(nums) {
+func findKthNumber(m int, n int, k int) int {
+	l, h := 1, m*n
+	for l + 1 < h {
+		mid := l + (h-l)/2
+		if count(mid, m, n, k) {
+			h = mid
+		}else {
+			l = mid
+		}
+	}
+	if count(l, m, n, k) {
+		return l
+	}
+	return h
+}
+
+func count(mid, m, n, k int) bool {
+	res := 0
+	for i := 1; i <= m; i++ {
+		tmp := mid / i
+		if tmp == 0 {
 			break
 		}
-		maxs = append(maxs, slidWindow(i, i+k, nums))
+		if tmp < n {
+			res += tmp
+		}else {
+			res += n
+		}
 	}
-	return maxs
+	return res >= k
 }
-// 0000 0001
-func slidWindow(i, j int, nums []int) int {
-	max := float64(-1 << 63)
-	for x := i; x < j; x++ {
-		max = math.Max(max, float64(nums[x]))
+
+func printRow(r []int) {
+	for _, v := range r {
+		fmt.Print(v, " ")
 	}
-	return int(max)
+	fmt.Println()
 }
