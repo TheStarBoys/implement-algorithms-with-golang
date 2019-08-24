@@ -1,17 +1,26 @@
 package leetcode
 
 // 二分查找，效率跟普通的差不多
+// 解题思路：
+// 每次的mid跟h比较，mid位置的元素<=h位置的元素，说明mid处于后面的区间
+// 需要移动h指针到mid处；反之亦然
 func findMin(nums []int) int {
-	l, h := 0, len(nums) - 1
-	for l < h {
-		m := l + (h - l) / 2
-		if nums[m] <= nums[h] {
-			h = m
+	if len(nums) == 0{
+		return 0
+	}
+	l, h := 0, len(nums)-1
+	for l + 1 < h {
+		mid := l + (h-l)/2
+		if nums[mid] <= nums[h] {
+			h = mid
 		}else {
-			l = m + 1
+			l = mid
 		}
 	}
-	return nums[h]
+	if nums[l] > nums[h] {
+		return nums[h]
+	}
+	return nums[l]
 }
 
 // 解题思路：
