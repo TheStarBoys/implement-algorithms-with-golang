@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/TheStarBoys/implement-algorithms-with-golang/dataStructure/common/queue"
 )
-
 /*
 5
 1 2 3 3 5
@@ -13,44 +13,36 @@ import (
 3 5 3
  */
 func main() {
-	fmt.Println(findKthNumber(2, 3, 6))
-	//fmt.Println(count(4, 2, 3, 6))
-}
-func findKthNumber(m int, n int, k int) int {
-	l, h := 1, m*n
-	for l + 1 < h {
-		mid := l + (h-l)/2
-		if count(mid, m, n, k) {
-			h = mid
-		}else {
-			l = mid
-		}
-	}
-	if count(l, m, n, k) {
-		return l
-	}
-	return h
+	m := Constructor(1)
+	fmt.Println(m.Next(-1))
+	fmt.Println(m.Next(10))
+	fmt.Println(m.Next(3))
+	fmt.Println(m.Next(5))
 }
 
-func count(mid, m, n, k int) bool {
-	res := 0
-	for i := 1; i <= m; i++ {
-		tmp := mid / i
-		if tmp == 0 {
-			break
-		}
-		if tmp < n {
-			res += tmp
-		}else {
-			res += n
-		}
-	}
-	return res >= k
+type MovingAverage struct {
+	queue.CircularQueue
+	NumSize int
 }
 
-func printRow(r []int) {
-	for _, v := range r {
-		fmt.Print(v, " ")
+
+/** Initialize your data structure here. */
+func Constructor(size int) MovingAverage {
+	return MovingAverage{queue.Constructor(size), 0}
+}
+
+
+func (this *MovingAverage) Next(val int) float64 {
+	if this.IsFull() {
+		this.DeQueue()
 	}
-	fmt.Println()
+	this.EnQueue(val)
+	if this.NumSize < this.Size {
+		this.NumSize++
+	}
+	sum := 0
+	for i := 0; i < this.Size; i++ {
+		sum += this.Queue[i].(int)
+	}
+	return float64(sum) / float64(this.NumSize)
 }
