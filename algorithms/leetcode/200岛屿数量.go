@@ -1,18 +1,6 @@
-package main
+package leetcode
 
-import "fmt"
-
-func main() {
-	grid := [][]byte{
-		{'1','1','1','1','0'},
-		{'1','1','0','1','0'},
-		{'1','1','0','0','0'},
-		{'0','0','0','0','0'},
-	}
-	fmt.Println(numIslands(grid))
-}
-
-
+// BFS
 var dx = [4]int{-1, 1, 0, 0}
 var dy = [4]int{0, 0, 1, -1}
 var row, col int

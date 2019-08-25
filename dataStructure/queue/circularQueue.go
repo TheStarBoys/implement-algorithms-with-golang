@@ -1,10 +1,10 @@
 package queue
 // LeetCode官方的循环链表实现golang版
 type CircularQueue struct {
-	Head    int
-	Tail    int
-	Queue   []int
-	Size 	int
+	Head int
+	Tail int
+	Data []int
+	Size int
 }
 
 /** Initialize your data structure here. Set the size of the queue to be k. */
@@ -22,7 +22,7 @@ func (this *CircularQueue) EnQueue(value int) bool {
 		this.Head = 0
 	}
 	this.Tail = (this.Tail + 1) % this.Size
-	this.Queue[this.Tail] = value
+	this.Data[this.Tail] = value
 	return true
 }
 
@@ -47,7 +47,7 @@ func (this *CircularQueue) Front() int {
 	if this.IsEmpty() {
 		return -1
 	}
-	return this.Queue[this.Head]
+	return this.Data[this.Head]
 }
 
 
@@ -56,7 +56,7 @@ func (this *CircularQueue) Rear() int {
 	if this.IsEmpty() {
 		return -1
 	}
-	return this.Queue[this.Tail]
+	return this.Data[this.Tail]
 }
 
 
