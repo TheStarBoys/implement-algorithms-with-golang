@@ -22,7 +22,7 @@ func numIslands(grid [][]byte) int {
 	}
 	return count
 }
-
+// 广度优先搜索，查找出当前坐标，与之在垂直和水平方向相连的陆地
 func BFS(grid [][]byte, i, j int){
 	queue := make([]int, 0)
 	queue = append(queue, i, j)
