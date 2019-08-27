@@ -1,23 +1,6 @@
-package main
+package leetcode
 
-import (
-	"fmt"
-	"github.com/TheStarBoys/implement-algorithms-with-golang/algorithms/tag/mysort"
-	"strings"
-)
-
-func main() {
-	slice := []int{2, 1, 6, 4, 5, 9}
-	mysort.InsertionSort(slice)
-	fmt.Println(slice)
-}
-func help(src string) string{
-	src = strings.ReplaceAll(src, "[", "{")
-	src = strings.ReplaceAll(src, "]", "}")
-	src = strings.ReplaceAll(src, "\"", "'")
-	return src
-}
-func isValidSudoku(board [][]byte) bool {
+func isValidSudoku036_0(board [][]byte) bool {
 	for x := range board {
 		row := make(map[byte]int)
 		for y := range board[x] {
