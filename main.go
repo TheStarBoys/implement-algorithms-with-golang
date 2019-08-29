@@ -2,71 +2,21 @@ package main
 
 import (
 	"fmt"
-	"github.com/TheStarBoys/implement-algorithms-with-golang/algorithms/tag/mysort"
-	"strings"
 )
-
 func main() {
-	slice := []int{2, 1, 6, 4, 5, 9}
-	mysort.InsertionSort(slice)
-	fmt.Println(slice)
-}
-func help(src string) string{
-	src = strings.ReplaceAll(src, "[", "{")
-	src = strings.ReplaceAll(src, "]", "}")
-	src = strings.ReplaceAll(src, "\"", "'")
-	return src
-}
-func isValidSudoku(board [][]byte) bool {
-	for x := range board {
-		row := make(map[byte]int)
-		for y := range board[x] {
-			num := board[x][y]
-			if num == '.' {
-				continue
-			}
-			if _, ok := row[num]; ok {
-				return false
-			}
-			row[num] = 1
+	n := 0
+	fmt.Scanf("%d", &n)
+	l, h := -90, 90
+	count := 6
+	for l + 1 < h && count > 0 {
+		mid := (l + h) / 2
+		if mid <= n {
+			l = mid
+			fmt.Print(1)
+		}else {
+			h = mid
+			fmt.Print(0)
 		}
+		count--
 	}
-	for y := range board[0] {
-		col := make(map[byte]int)
-		for x := range board {
-			num := board[x][y]
-			if num == '.' {
-				continue
-			}
-			if _, ok := col[num]; ok {
-				return false
-			}
-			col[num] = 1
-		}
-	}
-	for i := 0; i < len(board); i= i+3 {
-		for j := 0; j < len(board[0]); j = j+3 {
-			if !findSmallTable(i, j, board) {
-				return false
-			}
-		}
-	}
-	return true
-}
-func findSmallTable(x, y int, board [][]byte) bool {
-	smallTable := make(map[byte]int)
-	for i := x; i < x + 3; i++ {
-		for j := y; j < y + 3; j++ {
-			num := board[i][j]
-			if num == '.' {
-				continue
-			}
-			_, ok := smallTable[num]
-			if ok {
-				return false
-			}
-			smallTable[board[i][j]] = 1
-		}
-	}
-	return true
 }
