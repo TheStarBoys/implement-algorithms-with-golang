@@ -1,33 +1,8 @@
-package main
+package leetcode
 
-import (
-	"fmt"
-	"strings"
-)
-func main() {
-	fmt.Println(fun(5))
-}
-func fun(n int) int {
-	if n == 1 {
-		return 1
-	}
-	return n * fun(n - 1)
-}
-func delete(l, r int, s string) int {
-	count := 0
-	for ; l < r; l, r = l + 1, r - 1 {
-		if s[l] != s[r] {
-			count = delete(l+1, r, s) + 1
-			tmp := delete(l, r-1, s) + 1
-			if count > tmp {
-				count = tmp
-			}
-		}
-	}
-	return count
-}
-
-func myAtoi(str string) int {
+import "strings"
+// 自己实现的算法，效率极低
+func myAtoi008_0(str string) int {
 	str = strings.TrimSpace(str)
 	if str == "" || str[0] != '+' && str[0] != '-' && str[0] < '0' || str[0] > '9' {
 		return 0
@@ -68,7 +43,7 @@ func myAtoi(str string) int {
 		}
 		num = num * 10 + curNum
 		if num > 1 << 31 - 1 {
-			return 1 << 31 - 1
+			break
 		}
 	}
 	if flag == "-" {
