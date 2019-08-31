@@ -11,7 +11,7 @@ package leetcode
 	用时：0 ms
 	内存：2.1 MB
  */
-func isValid(s string) bool {
+func isValid020_0(s string) bool {
 	// [3]int 表示括号 "()" "{}" "[]"的闭合状况
 	// 1 表示开， 0 表示闭合
 	/*
@@ -80,6 +80,36 @@ func checkStack(bracket string, stack []string) bool{
 	return true
 }
 
-func IsValid(s string) bool {
-	return isValid(s)
+func isValid020_1(s string) bool {
+	stack := []byte{}
+	for i := 0; i < len(s); i++ {
+		switch s[i] {
+		case '{':
+			stack = append(stack, '{')
+		case '[':
+			stack = append(stack, '[')
+		case '(':
+			stack = append(stack, '(')
+		case '}':
+			if len(stack) == 0 || stack[len(stack) - 1] != '{' {
+				return false
+			}
+			stack = stack[:len(stack) - 1]
+		case ']':
+			if len(stack) == 0 || stack[len(stack) - 1] != '[' {
+				return false
+			}
+			stack = stack[:len(stack) - 1]
+		case ')':
+			if len(stack) == 0 || stack[len(stack) - 1] != '(' {
+				return false
+			}
+			stack = stack[:len(stack) - 1]
+		}
+	}
+	if len(stack) != 0 {
+		return false
+	}
+	return true
 }
+

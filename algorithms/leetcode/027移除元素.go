@@ -1,6 +1,6 @@
 package leetcode
 
-func removeElement(nums []int, val int) int {
+func removeElement027_0(nums []int, val int) int {
 	if len(nums) == 0 {
 		return 0
 	}
@@ -11,5 +11,5 @@ func removeElement(nums []int, val int) int {
 			cur++
 		}
 	}
-	return cur + 1
+	return cur
 }

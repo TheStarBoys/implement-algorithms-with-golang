@@ -52,7 +52,7 @@ type ListNode struct {
 //	return head
 //}
 // 递归思想
-func mergeTwoLists (l1 *ListNode, l2 *ListNode) *ListNode {
+func mergeTwoLists021_0(l1 *ListNode, l2 *ListNode) *ListNode {
 	head := &ListNode{}
 	if l1 == nil {
 		return l2
@@ -61,18 +61,43 @@ func mergeTwoLists (l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	if l1.Val < l2.Val {
 		head = l1
-		head.Next = mergeTwoLists(l1.Next, l2)
+		head.Next = mergeTwoLists021_0(l1.Next, l2)
 	}else {
 		head = l2
-		head.Next = mergeTwoLists(l1, l2.Next)
+		head.Next = mergeTwoLists021_0(l1, l2.Next)
 	}
 	return head
 }
-
-func MergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	return mergeTwoLists(l1, l2)
+// 解法2：循环遍历，O(n) n为两个链表中最小的长度
+func mergeTwoLists021_1(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil {
+		return l2
+	}else if l2 == nil {
+		return l1
+	}
+	head := &ListNode{}
+	tmp := head
+	for l1 != nil && l2 != nil {
+		if l1.Val >= l2.Val {
+			tmp.Val = l2.Val
+			l2 = l2.Next
+		}else {
+			tmp.Val = l1.Val
+			l1 = l1.Next
+		}
+		if l1 == nil || l2 == nil {
+			break
+		}
+		tmp.Next = &ListNode{}
+		tmp = tmp.Next
+	}
+	if l1 != nil {
+		tmp.Next = l1
+	}else if l2 != nil {
+		tmp.Next = l2
+	}
+	return head
 }
-
 func PrintNode(l ListNode) {
 	for l.Next != nil {
 		fmt.Print(l.Val)
