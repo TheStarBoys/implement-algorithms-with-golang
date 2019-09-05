@@ -1,18 +1,13 @@
-package main
+package leetcode
 
-import "fmt"
+//type TreeNode struct {
+//	Val int
+//	Left *TreeNode
+//	Right *TreeNode
+//}
 
-func main() {
-	root := &TreeNode{1, nil, &TreeNode{2, &TreeNode{3, nil, nil}, nil}}
-	fmt.Println(inorderTraversal(root))
-}
-type TreeNode struct {
-	Val int
-	Left *TreeNode
-	Right *TreeNode
-}
-
-func inorderTraversal(root *TreeNode) []int {
+// DFS
+func inorderTraversal094_0(root *TreeNode) []int {
 	res := []int{}
 	stack := make([]*TreeNode, 0)
 	curr := root

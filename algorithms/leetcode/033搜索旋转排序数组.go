@@ -33,7 +33,7 @@ package leetcode
 [...] [...]		-> target和mid都在右区间，但target比mid小，移动尾指针
       t m
  */
-func search33(nums []int, target int) int {
+func search033_0(nums []int, target int) int {
 	if len(nums) == 0 {
 		return -1
 	}
@@ -57,6 +57,33 @@ func search33(nums []int, target int) int {
 			}else {
 				h = mid
 			}
+		}
+	}
+	if nums[l] == target {
+		return l
+	}else if nums[h] == target {
+		return h
+	}
+	return -1
+}
+
+// 思想与上面的类似，但代码量更少
+func search033_1(nums []int, target int) int {
+	if len(nums) == 0 {
+		return -1
+	}
+	last := nums[len(nums) - 1]
+	l, h := 0, len(nums) - 1
+
+	for l + 1 < h {
+		mid := l + (h - l) / 2
+		if nums[mid] == target {
+			return mid
+		}else if nums[mid] > last && (nums[mid] < target || target <= last) ||
+			nums[mid] < last && target <= last && target > nums[mid] {
+			l = mid
+		}else {
+			h = mid
 		}
 	}
 	if nums[l] == target {

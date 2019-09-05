@@ -7,7 +7,7 @@ import "strconv"
 直到所有的元素都找一遍
  */
 
-func countAndSay(n int) string {
+func countAndSay038_0(n int) string {
 	// 快慢指针
 	cur, fast := 0, 0
 	serial, temp := "1", ""
@@ -31,11 +31,11 @@ func countAndSay(n int) string {
 	return serial
 }
 // 递归
-func countAndSay1(n int) string {
+func countAndSay038_1(n int) string {
 	if n == 1 {
 		return "1"
 	}
-	pre := countAndSay(n-1)
+	pre := countAndSay038_1(n-1)
 	count := 1
 	now := "" // 现在的结果
 	for i := 0; i < len(pre); i++ {
@@ -53,7 +53,4 @@ func countAndSay1(n int) string {
 		}
 	}
 	return now
-}
-func CountAndSay(n int) string {
-	return countAndSay(n)
 }
