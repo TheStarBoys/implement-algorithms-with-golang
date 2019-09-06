@@ -1,30 +1,32 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	root := &TreeNode{1, nil, &TreeNode{2, &TreeNode{3, nil, nil}, nil}}
-	fmt.Println(inorderTraversal(root))
+	fmt.Println(canVisitAllRooms([][]int{{1, 3},{3, 0, 1}, {2}, {0}}))
 }
-type TreeNode struct {
-	Val int
-	Left *TreeNode
-	Right *TreeNode
+func canVisitAllRooms(rooms [][]int) bool {
+	visited := make(map[int]bool)
+	dfs(rooms, 0, visited)
+
+	for i := range rooms {
+		if !visited[i] {
+			return false
+		}
+	}
+	return true
+}
+func dfs(rooms [][]int, room int, visited map[int]bool) {
+	visited[room] = true
+	for _, k := range rooms[room] {
+		if !visited[k] {
+			visited[k] = true
+			dfs(rooms, k, visited)
+		}
+	}
 }
 
-func inorderTraversal(root *TreeNode) []int {
-	res := []int{}
-	stack := make([]*TreeNode, 0)
-	curr := root
-	for curr != nil || len(stack) != 0 {
-		for curr != nil {
-			stack = append(stack, curr)
-			curr = curr.Left
-		}
-		curr = stack[len(stack) - 1]
-		stack = stack[:len(stack) - 1]
-		res = append(res, curr.Val)
-		curr = curr.Right
-	}
-	return res
-}
+
+

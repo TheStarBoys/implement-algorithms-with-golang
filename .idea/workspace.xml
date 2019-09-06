@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="baa49391-fcd3-4eb1-b9e8-b4d0798ea1e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/094二叉树的中序遍历.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/150逆波兰表达式求值.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/279完全平方数.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/286墙与门.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/494目标和.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/739每日温度.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/752打开转盘锁.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/tag/mysort/mergeSort.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/tag/numsHandle/001最大公约数.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/394字符串解码.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/542 01矩阵.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/733图像渲染.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/033搜索旋转排序数组.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/033搜索旋转排序数组.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/034在排序数组中查找元素的第一个和最后一个位置.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/034在排序数组中查找元素的第一个和最后一个位置.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/035搜索插入位置.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/035搜索插入位置.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/038报数.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/038报数.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/200岛屿数量.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/200岛屿数量.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,38 +18,38 @@
     <session id="-1146690757">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.13" value="3" />
+          <entry key="project.open.time.13" value="5" />
           <entry key="project.open.time.14" value="2" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="2" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.21" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="6380" />
-          <entry key="txt" value="167" />
+          <entry key="go" value="8322" />
+          <entry key="txt" value="184" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="6380" />
-          <entry key="PLAIN_TEXT" value="167" />
+          <entry key="Go" value="8322" />
+          <entry key="PLAIN_TEXT" value="184" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="32" />
+          <entry key="go" value="37" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="32" />
+          <entry key="Go" value="37" />
         </counts>
       </usages-collector>
     </session>
@@ -70,8 +59,47 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="350">
+              <caret line="25" column="34" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="34" />
+              <folding>
+                <element signature="e#14#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/algorithms/leetcode/733图像渲染.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="41" column="13" lean-forward="true" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/algorithms/leetcode/542 01矩阵.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/algorithms/leetcode/394字符串解码.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/Go/src/runtime/proc.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="153" selection-start-line="153" selection-end-line="153" />
             </state>
           </provider>
         </entry>
@@ -79,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/algorithms/leetcode/094二叉树的中序遍历.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="343">
+              <caret line="19" column="20" lean-forward="true" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -151,9 +179,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/algorithms/leetcode/344反转字符串.go" />
-        <option value="$PROJECT_DIR$/algorithms/leetcode/118杨辉三角.go" />
-        <option value="$PROJECT_DIR$/algorithms/tag/面试题/byte字节跳动/002手串.go" />
         <option value="$PROJECT_DIR$/algorithms/tag/面试题/byte字节跳动/001用户喜好.go" />
         <option value="$PROJECT_DIR$/algorithms/leetcode/074搜索二维矩阵.go" />
         <option value="$PROJECT_DIR$/algorithms/leetcode/240搜索二维矩阵Ⅱ.go" />
@@ -200,8 +225,11 @@
         <option value="$PROJECT_DIR$/algorithms/leetcode/150逆波兰表达式求值.go" />
         <option value="$PROJECT_DIR$/algorithms/leetcode/200岛屿数量.go" />
         <option value="$PROJECT_DIR$/algorithms/leetcode/494目标和.go" />
-        <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/algorithms/leetcode/094二叉树的中序遍历.go" />
+        <option value="$PROJECT_DIR$/algorithms/leetcode/394字符串解码.go" />
+        <option value="$PROJECT_DIR$/algorithms/leetcode/733图像渲染.go" />
+        <option value="$PROJECT_DIR$/algorithms/leetcode/542 01矩阵.go" />
+        <option value="$PROJECT_DIR$/main.go" />
       </list>
     </option>
   </component>
@@ -221,18 +249,17 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="303" />
+    <option name="y" value="97" />
     <option name="width" value="1400" />
-    <option name="height" value="1054" />
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -268,6 +295,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -324,16 +352,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="326" y="5" width="1120" height="844" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16286863" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23446327" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27234042" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3815603" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26863572" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3815603" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3285968" />
@@ -380,9 +408,9 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/main.go</url>
-          <line>15</line>
+          <line>9</line>
           <properties />
-          <option name="timeStamp" value="43" />
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -429,6 +457,11 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>len(invalidAddr)</expression-string>
+        <language-id>go</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>('0' - '0' + 1)%10 + '0'</expression-string>
         <language-id>go</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -468,27 +501,9 @@
         <language-id>go</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>curarray[i]</expression-string>
-        <language-id>go</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../../runtime/panic.go" />
-    <entry file="file://$PROJECT_DIR$/dataStructure/common/queue/circularQueue.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="45" column="38" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataStructure/List.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1689" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dataStructure/LinkList.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-198" />
@@ -691,13 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Go/src/runtime/proc.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5088">
-          <caret line="217" selection-start-line="217" selection-end-line="217" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/algorithms/leetcode/038报数.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1176">
@@ -740,6 +748,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/494目标和.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/algorithms/leetcode/200岛屿数量.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="744">
@@ -765,24 +780,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/494目标和.go">
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/094二叉树的中序遍历.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+        <state relative-caret-position="343">
+          <caret line="19" column="20" lean-forward="true" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/094二叉树的中序遍历.go">
+    <entry file="file://D:/Go/src/runtime/proc.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="338">
+          <caret line="153" selection-start-line="153" selection-end-line="153" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/394字符串解码.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/733图像渲染.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="41" column="13" lean-forward="true" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/542 01矩阵.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="350">
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="34" />
+          <folding>
+            <element signature="e#14#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
