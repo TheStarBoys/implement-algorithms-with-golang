@@ -1,14 +1,9 @@
-package main
+package leetcode
 
-import (
-	"fmt"
-	"math"
-)
+import "math"
 
-func main() {
-	fmt.Println(minSubArrayLen(8, []int{1,1}))
-}
-func minSubArrayLen(s int, nums []int) int {
+// 效率很低，待优化
+func minSubArrayLen209_0(s int, nums []int) int {
 	sum, min := 0, math.MaxInt64
 	slow := 0
 	flag := 0
