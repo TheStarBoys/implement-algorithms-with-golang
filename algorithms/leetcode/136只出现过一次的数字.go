@@ -34,3 +34,11 @@ func singleNumber136_1(nums []int) int {
 	}
 	return -1
 }
+// 解法3：异或。相同数字异或等于0，所以最后剩下的数字是只出现一次的数字
+func singleNumber(nums []int) int {
+	res := nums[0]
+	for i := 1; i < len(nums); i++ {
+		res ^= nums[i]
+	}
+	return res
+}

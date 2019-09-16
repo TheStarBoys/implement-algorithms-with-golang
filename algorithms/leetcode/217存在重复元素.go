@@ -13,15 +13,14 @@ func containsDuplicate217_0(nums []int) bool {
 	}
 	return false
 }
-// 解法2：利用map  效率低下
+// 解法2：利用map作为哈希集
 func containsDuplicate217_1(nums []int) bool {
-	table := make(map[int]int)
+	visited := make(map[int]bool)
 	for i := range nums {
-		_, ok := table[nums[i]]
-		if ok {
+		if visited[nums[i]] {
 			return true
 		}
-		table[nums[i]] = 1
+		visited[nums[i]] = true
 	}
 	return false
 }

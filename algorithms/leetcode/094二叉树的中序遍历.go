@@ -23,3 +23,16 @@ func inorderTraversal094_0(root *TreeNode) []int {
 	}
 	return res
 }
+// 递归
+func inorderTraversal094_1(root *TreeNode) []int {
+	ans := []int{}
+	return helper094_1(root, ans)
+}
+
+func helper094_1(root *TreeNode, ans []int) []int {
+	if root == nil { return ans }
+	ans = helper094_1(root.Left, ans)
+	ans = append(ans, root.Val)
+	ans = helper094_1(root.Right, ans)
+	return ans
+}
