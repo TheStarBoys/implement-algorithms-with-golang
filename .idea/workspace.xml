@@ -2,36 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="baa49391-fcd3-4eb1-b9e8-b4d0798ea1e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/048旋转图像.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/061旋转链表.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/062不同路径.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/101对称二叉树.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/102二叉树的层次遍历.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/104二叉树的最大深度.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/105从前序与中序遍历序列构造二叉树.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/106从中序与后序遍历序列构造二叉树.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/112路径总和.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/144二叉树的前序遍历.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/145二叉树的后序遍历.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/190颠倒二进制位.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/191位1的个数.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/204计数质数.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/234回文链表.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/236二叉树的最近公共祖先.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/268缺失数字.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/326-3的幂.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/328奇偶链表.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/384打乱数组.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/412FizzBuzz.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/461汉明距离.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/063不同路径Ⅱ.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/125验证回文串.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/242有效字母异位词.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithms/leetcode/387字符串中的第一个唯一字符.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/036有效的数独.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/036有效的数独.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/094二叉树的中序遍历.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/094二叉树的中序遍历.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/122买卖股票的最佳时机Ⅱ.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/122买卖股票的最佳时机Ⅱ.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/136只出现过一次的数字.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/136只出现过一次的数字.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/198打家劫舍.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/198打家劫舍.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/217存在重复元素.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/217存在重复元素.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/350两个数组的交集Ⅱ.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/350两个数组的交集Ⅱ.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/leetcode/062不同路径.go" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/leetcode/062不同路径.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,12 +20,12 @@
     <session id="-1146690757">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="20" />
+          <entry key="project.closed" value="21" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.11" value="3" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="5" />
-          <entry key="project.open.time.14" value="2" />
+          <entry key="project.open.time.14" value="3" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="3" />
           <entry key="project.open.time.17" value="2" />
@@ -58,52 +34,70 @@
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="24" />
+          <entry key="project.opened" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="19327" />
+          <entry key="go" value="19945" />
           <entry key="txt" value="220" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="19327" />
+          <entry key="Go" value="19945" />
           <entry key="PLAIN_TEXT" value="220" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="111" />
+          <entry key="go" value="115" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="111" />
+          <entry key="Go" value="115" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.go">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/algorithms/leetcode/387字符串中的第一个唯一字符.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="33" column="18" lean-forward="true" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
-              <folding>
-                <element signature="e#14#42#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="408">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/algorithms/leetcode/062不同路径.go">
+        <entry file="file://$PROJECT_DIR$/algorithms/leetcode/242有效字母异位词.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="168">
+              <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+              <folding>
+                <element signature="e#18#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/algorithms/leetcode/125验证回文串.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-117">
+              <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/algorithms/leetcode/063不同路径Ⅱ.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1512">
+              <caret line="63" column="1" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -112,7 +106,7 @@
         <entry file="file://$PROJECT_DIR$/algorithms/leetcode/048旋转图像.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="552">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
@@ -120,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/algorithms/leetcode/350两个数组的交集Ⅱ.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="48" column="18" lean-forward="true" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
+            <state relative-caret-position="1152">
+              <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -130,7 +124,7 @@
         <entry file="file://$PROJECT_DIR$/algorithms/leetcode/283移动零.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
-              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+              <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -139,7 +133,7 @@
         <entry file="file://$PROJECT_DIR$/algorithms/leetcode/036有效的数独.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2112">
-              <caret line="88" column="1" lean-forward="true" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
+              <caret line="88" column="1" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -147,7 +141,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/algorithms/leetcode/136只出现过一次的数字.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
+            <state relative-caret-position="864">
               <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
             </state>
           </provider>
@@ -156,7 +150,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/algorithms/leetcode/217存在重复元素.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
+            <state relative-caret-position="360">
               <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
             </state>
           </provider>
@@ -201,10 +195,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/algorithms/leetcode/498对角线遍历.go" />
-        <option value="$PROJECT_DIR$/algorithms/leetcode/054螺旋矩阵.go" />
-        <option value="$PROJECT_DIR$/algorithms/tag/面试题/byte字节跳动/003万万没想到之抓捕孔连顺.go" />
-        <option value="$PROJECT_DIR$/algorithms/leetcode/003无重复字符的最长字串.go" />
         <option value="$PROJECT_DIR$/algorithms/tag/面试题/byte字节跳动/005小Q的方块游戏.go" />
         <option value="$PROJECT_DIR$/algorithms/tag/面试题/byte字节跳动/004被看到最多次的机器人.go" />
         <option value="$PROJECT_DIR$/algorithms/leetcode/067二进制求和.go" />
@@ -250,8 +240,12 @@
         <option value="$PROJECT_DIR$/algorithms/leetcode/350两个数组的交集Ⅱ.go" />
         <option value="$PROJECT_DIR$/algorithms/leetcode/036有效的数独.go" />
         <option value="$PROJECT_DIR$/algorithms/leetcode/048旋转图像.go" />
-        <option value="$PROJECT_DIR$/algorithms/leetcode/062不同路径.go" />
         <option value="$PROJECT_DIR$/main.go" />
+        <option value="$PROJECT_DIR$/algorithms/leetcode/062不同路径.go" />
+        <option value="$PROJECT_DIR$/algorithms/leetcode/063不同路径Ⅱ.go" />
+        <option value="$PROJECT_DIR$/algorithms/leetcode/387字符串中的第一个唯一字符.go" />
+        <option value="$PROJECT_DIR$/algorithms/leetcode/242有效字母异位词.go" />
+        <option value="$PROJECT_DIR$/algorithms/leetcode/125验证回文串.go" />
       </list>
     </option>
   </component>
@@ -272,9 +266,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="365" />
-    <option name="y" value="3" />
-    <option name="width" value="1403" />
+    <option name="x" value="325" />
+    <option name="y" value="1" />
+    <option name="width" value="1404" />
     <option name="height" value="1060" />
   </component>
   <component name="ProjectView">
@@ -282,6 +276,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -317,7 +312,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -374,10 +368,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="292" y="3" width="1122" height="848" extended-state="0" />
+    <frame x="260" y="1" width="1123" height="848" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19078948" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1943662" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -431,14 +425,7 @@
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/main.go</url>
           <line>25</line>
-          <properties />
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/main.go</url>
-          <line>43</line>
-          <properties />
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -532,34 +519,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/003无重复字符的最长字串.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/027移除元素.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/203移除链表元素.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/160相交链表.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/algorithms/leetcode/142环形链表Ⅱ.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -819,48 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/217存在重复元素.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/136只出现过一次的数字.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/350两个数组的交集Ⅱ.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="48" column="18" lean-forward="true" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/283移动零.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/036有效的数独.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2112">
-          <caret line="88" column="1" lean-forward="true" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/048旋转图像.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Go/src/fmt/scan.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -875,20 +792,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/062不同路径.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="33" column="18" lean-forward="true" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+        <state relative-caret-position="521">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
           <folding>
             <element signature="e#14#42#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/062不同路径.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
+          <caret line="75" column="1" selection-start-line="75" selection-start-column="1" selection-end-line="75" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/063不同路径Ⅱ.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1512">
+          <caret line="63" column="1" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/048旋转图像.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/350两个数组的交集Ⅱ.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1152">
+          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/283移动零.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/036有效的数独.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2112">
+          <caret line="88" column="1" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/136只出现过一次的数字.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/217存在重复元素.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/387字符串中的第一个唯一字符.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/242有效字母异位词.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+          <folding>
+            <element signature="e#18#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithms/leetcode/125验证回文串.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-117">
+          <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
         </state>
       </provider>
     </entry>

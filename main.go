@@ -13,7 +13,7 @@ func main() {
 	//	{0,0,1,0},
 	//	{0,1,0,0},
 	//	{0,0,0,0}}
-	fmt.Println(uniquePaths(3, 2))
+	fmt.Println(uniquePaths(3, 3))
 }
 
 func replace(s string) string {
@@ -23,29 +23,14 @@ func replace(s string) string {
 }
 
 func uniquePaths(m int, n int) int {
-	if m == 0 || n == 0 {
-		return 0
-	} else if m == 1 || n == 1 {
-		return 1
-	}
-	nums := make([][]int, n)
-	for i := 0; i < n; i++ {
-		t := make([]int, m)
-		t[m-1] = 1 // 这个位置的元素只能往下走这一种情况
-		nums[n-i-1] = t
-		for j := m-2; j >= 0; j-- {
-			dofunc(n-i-1, j, nums)
+	cur := make([]int, n)
+	for i := 0; i < n; i++ { cur[i] = 1 }
+	for i := 1; i < m; i++ {
+		for j := 1; j < n; j++ {
+			cur[j] += cur[j-1]
 		}
 	}
-	return nums[0][0]
-}
-
-func dofunc(n, m int, nums [][]int) {
-	i, j := 0, nums[n][m+1] // i, j分别保存该节点右侧跟下侧的值
-	if n < len(nums)-1 { // 如果不是最后一行
-		i = nums[n+1][m]
-	}
-	nums[n][m] = i+j
+	return cur[n-1]
 }
 
 
