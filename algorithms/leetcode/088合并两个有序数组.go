@@ -61,3 +61,25 @@ func merge088_2(nums1 []int, m int, nums2 []int, n int)  {
 		copy(nums1[p:], nums2[p2:])
 	}
 }
+// 解法4：双指针/从后往前
+func merge(nums1 []int, m int, nums2 []int, n int)  {
+	i, j := m - 1, n -1
+	cur := m + n - 1
+	for ; i >= 0 && j >= 0; cur-- {
+		if nums1[i] >= nums2[j] {
+			nums1[cur] = nums1[i]
+			i--
+		} else {
+			nums1[cur] = nums2[j]
+			j--
+		}
+	}
+	// 为什么不做这个判断，因为i >= 0的时候
+	// nums1[0:i+1]的位置其实已经是排好序的了
+	// if i >= 0 {
+	//     copy
+	// }
+	if j >= 0 {
+		copy(nums1[:cur+1], nums2[:j+1])
+	}
+}
