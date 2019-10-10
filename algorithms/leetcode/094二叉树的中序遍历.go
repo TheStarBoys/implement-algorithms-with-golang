@@ -6,8 +6,36 @@ package leetcode
 //	Right *TreeNode
 //}
 
-// DFS
+// 直接套用模版的dfs，不是太优雅
 func inorderTraversal094_0(root *TreeNode) []int {
+	ans := []int{}
+	if root == nil { return ans }
+	stack := make([]*TreeNode, 0)
+	stack = append(stack, root)
+	visited := make(map[*TreeNode]bool)
+	visited[root] = true
+
+	for len(stack) != 0 {
+		cur := stack[len(stack)-1]
+		node := cur.Left
+		for node != nil && !visited[node] {
+			stack = append(stack, node)
+			visited[node] = true
+			node = node.Left
+		}
+		node = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		ans = append(ans, node.Val)
+		if node.Right != nil && !visited[node.Right] {
+			visited[node.Right] = true
+			stack = append(stack, node.Right)
+		}
+	}
+	return ans
+}
+
+// DFS
+func inorderTraversal094_1(root *TreeNode) []int {
 	res := []int{}
 	stack := make([]*TreeNode, 0)
 	curr := root
@@ -24,7 +52,7 @@ func inorderTraversal094_0(root *TreeNode) []int {
 	return res
 }
 // 递归
-func inorderTraversal094_1(root *TreeNode) []int {
+func inorderTraversal094_2(root *TreeNode) []int {
 	ans := []int{}
 	return helper094_1(root, ans)
 }
