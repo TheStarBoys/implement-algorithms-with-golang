@@ -1,13 +1,7 @@
-package main
+package leetcode
 
-import (
-	"fmt"
-)
 
-func main() {
-	fmt.Println(letterCombinations("23"))
-}
-func letterCombinations(digits string) []string {
+func letterCombinations017_0(digits string) []string {
 	if digits == "" {
 		return []string{}
 	}
@@ -27,17 +21,17 @@ func letterCombinations(digits string) []string {
 		dig = append(dig, table[digits[i]])
 	}
 	for i := 0; i < len(dig[0]); i++ {
-		ans = getAns(dig, 1, []byte{dig[0][i]}, ans)
+		ans = getAns017_0(dig, 1, []byte{dig[0][i]}, ans)
 	}
-	return ans[:len(ans)-1]
+	return ans
 }
 
-func getAns(digits [][]byte, depth int, tmp []byte, ans []string) []string {
+func getAns017_0(digits [][]byte, depth int, tmp []byte, ans []string) []string {
 	if depth >= len(digits) {
 		return append(ans, string(tmp))
 	}
 	for i := 0; i < len(digits[depth]); i++ {
-		ans = getAns(digits, depth+1, append(tmp, digits[depth][i]), ans)
+		ans = getAns017_0(digits, depth+1, append(tmp, digits[depth][i]), ans)
 	}
 	return ans
 }
