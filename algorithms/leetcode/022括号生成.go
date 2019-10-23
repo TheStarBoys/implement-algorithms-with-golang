@@ -5,14 +5,14 @@ package leetcode
 func generateParenthesis(n int) []string {
 	max = n * 2
 	ans = make([]string, 0)
-	backtrace("", 0)
+	backtrack("", 0)
 	return ans
 }
 
 var ans []string
 var table = []byte{'(', ')'}
 var max = 0
-func backtrace(comb string, depth int) {
+func backtrack(comb string, depth int) {
 	if depth >= max {
 		if isValid(comb) {
 			ans = append(ans, comb)
@@ -20,7 +20,7 @@ func backtrace(comb string, depth int) {
 		return
 	}
 	for i := range table {
-		backtrace(comb + string(table[i]), depth+1)
+		backtrack(comb + string(table[i]), depth+1)
 	}
 }
 
