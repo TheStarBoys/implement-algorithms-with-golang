@@ -5,6 +5,7 @@ import (
 	"os"
 	"io/ioutil"
 	"fmt"
+	"path/filepath"
 )
 
 func TestLe(t *testing.T) {
@@ -13,6 +14,8 @@ func TestLe(t *testing.T) {
 	fmt.Println(GetAllFile(dir))
 }
 
+
+// 文件改名
 func GetAllFile(pathname string) error {
 	rd, err := ioutil.ReadDir(pathname)
 	for _, fi := range rd {
@@ -21,6 +24,11 @@ func GetAllFile(pathname string) error {
 			GetAllFile(pathname + fi.Name() + "\\")
 		} else {
 			fmt.Println(fi.Name())
+			err := os.Rename(filepath.Join(pathname, fi.Name()), filepath.Join(pathname, "0" + fi.Name()))
+			if err != nil {
+				fmt.Println("rename err:", err)
+				continue
+			}
 
 		}
 	}
