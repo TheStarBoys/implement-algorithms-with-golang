@@ -5,6 +5,7 @@ package MI
 // 输出结果应为
 // str := []string{"", "abcd", "abde", "bcad", "bcadf", "bcadf", "bcda"}
 
+// 效率较高，空间浪费大
 func SortStrings(str []string, indx int) []string {
 	// 'a' -> 'z' 26个字母，映射到26个桶中
 	bucket := make([][]string, 26)
@@ -40,4 +41,57 @@ func SortStrings(str []string, indx int) []string {
 		h = h+length
 	}
 	return str
+}
+
+// 新思路
+func SortStrings2(strs []string) []string {
+	for i := 0; i < len(strs) - 1; i++ {
+		for j := 1; j < len(strs) - i; j++ {
+			if isSmall(strs[j-1], strs[j]) == false {
+				strs[j-1], strs[j] = strs[j], strs[j-1]
+			}
+		}
+	}
+
+	return strs
+}
+
+// 判断字符串 a 是否小于 b
+func isSmall(a, b string) bool {
+	var i, j int
+
+	if a == "" {
+		return true
+	} else if b == "" {
+		return false
+	}
+
+	for ; i < len(a) && j < len(b) ; i, j = i+1, j+1 {
+		// 'a' - 'b' = -1
+
+		// 以下注释代码有问题是由于 a[i] 为 byte类型变量
+		// 底层为uint8，如果类似于 a[i] - b[j] = 0 - 2 的情况
+		// 结果并不为-2
+		// (0000 0000) - (0000 0010)
+		// (0000 0000) + (1111 1110)
+		// = 254
+
+		// 如果是 int8 则会是
+		// (0000 0000) - (0000 0010)
+		// (0000 0000) + (1000 0010)
+		// = -2
+
+		//if tmp := a[i] - b[j]; tmp < 0 {
+		if tmp := int(a[i]) - int(b[j]); tmp < 0 {
+			return true
+		} else if tmp > 0 {
+			return false
+		}
+	}
+
+	if i >= len(a) {
+		return true
+	}
+
+	return false
 }
