@@ -1,14 +1,15 @@
 # 排序算法
+> 给定一个数据集，将数据按照指定要求进行排序，以下实现均针对整数数组，升序或降序排列。
 
 ## 冒泡排序
 
-时间复杂度：`O(N)`
+时间复杂度：`O(N2)`
 
 空间复杂度：`O(1)`
 
 内层循环每次两两比较，将最大值向右移到排序后的正确位置 `len(nums) - i`
 
-由于内层循环每次将当前最大值放在最后，当外层循环到 `len(nums) - 1` 时，剩下最后一个元素已经为正确位置，所以该元素不需要额外排序
+由于内层循环每次将当前最大值放在最后，当外层循环到 `len(nums) - 2` 时，剩下最后一个元素已经为正确位置，所以该元素不需要额外排序
 
 ```go
 func bubbleSort(nums []int) []int {
@@ -22,8 +23,44 @@ func bubbleSort(nums []int) []int {
 	return nums
 }
 ```
+优化版冒泡排序
+```go
+func bubbleSort(nums []int) []int {
+	for i := 0; i < len(nums) - 1; i++ {
+		flag := false
+		for j := 1; j < len(nums) - i; j++ {
+			if nums[j - 1] > nums[j] {
+				nums[j-1], nums[j] = nums[j], nums[j-1]
+				flag = true
+			}
+		}
+		if !flag {
+			break
+		}
+	}
+	return nums
+}
+```
 
+##  选择排序
 
+时间复杂度：`O(N2)`
+空间复杂度：`O(1)`
+
+```go
+func selectSort(nums []int) []int {
+	for i := 0; i < len(nums)-1; i++ {
+		min := i
+		for j := i + 1; j < len(nums); j++ {
+			if nums[min] > nums[j] {
+				min = j
+			}
+			nums[i], nums[min] = nums[min], nums[i]
+		}
+	}
+	return nums
+}
+```
 
 ## 桶排序
 
@@ -56,9 +93,9 @@ func bucketSort(nums []int) {
 
 ## 插入排序
 
-时间复杂度：
+时间复杂度：`O(N2)`
 
-空间复杂度：
+空间复杂度：`O(1)`
 
 ```go
 // 将排序数组a想象为牌堆，默认抽第一张牌（下标为0）放入手牌（从0 ~ j均为手牌），手牌是已排序的
@@ -92,15 +129,27 @@ func InsertionSort_Down(a []int) {
 }
 ```
 
+## 希尔排序
 
+时间复杂度
+
+空间复杂度
 
 ## 归并排序
 
+时间复杂度：`O(nlgn)`
+
+空间复杂度： `O(1)`
+
+```go
+
+````
+
 ## 快速排序
 
-时间复杂度：
+时间复杂度：`O(nlgn)`
 
-空间复杂度：
+空间复杂度： `O(nlgn)`
 
 ```go
 func quickSort(arr []int, left, right int) {
@@ -125,6 +174,5 @@ func quickSort(arr []int, left, right int) {
 	quickSort(arr, left, i-1) // 继续处理左边的，这是一个递归的过程
 	quickSort(arr, i+1, right) // 继续处理右边的，这是一个递归的过程
 }
-
 ```
 
