@@ -27,16 +27,16 @@ func bubbleSort(nums []int) []int {
 ```go
 func bubbleSort(nums []int) []int {
 	for i := 0; i < len(nums) - 1; i++ {
-        flag boolean := false
+		flag := false
 		for j := 1; j < len(nums) - i; j++ {
 			if nums[j - 1] > nums[j] {
 				nums[j-1], nums[j] = nums[j], nums[j-1]
-				boolean = true
+				flag = true
 			}
 		}
-        if !flag {
-            break
-        }
+		if !flag {
+			break
+		}
 	}
 	return nums
 }
