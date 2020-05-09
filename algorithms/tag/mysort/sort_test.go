@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"time"
 )
 
 func TestSort(t *testing.T) {
@@ -48,14 +49,15 @@ func testSort(f func([]int)) (err error) {
 	// 测试数组为空和nil的情况
 	f([]int{})
 	f(nil)
+	rand.Seed(time.Now().UnixNano())
 	// 测试一千种随机情况
 	for i := 0; i < 1000; i++ {
 		length := rand.Intn(1000)
 		arr := make([]int, length)
-		input := append([]int{}, arr...)
 		for j := range arr {
 			arr[j] = rand.Intn(1000)
 		}
+		input := append([]int{}, arr...)
 		if f(arr); isUpSorted(arr) == false {
 			return errors.New(fmt.Sprintf("input: %v, output: %v, expect: upSorted", input, arr))
 		}
