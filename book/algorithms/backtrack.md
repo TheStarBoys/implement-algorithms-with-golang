@@ -1,5 +1,7 @@
 # 回溯算法
 
+> 引用自：[回溯算法详解（修订版）]( https://www.cxyxiaowu.com/7103.html )
+
 ## 解题框架
 
 废话不多说，直接上回溯算法框架。**解决一个回溯问题，实际上就是一个决策树的遍历过程**。你只需要思考 3 个问题：
@@ -201,3 +203,183 @@ func backtrack(nums, track []int) {
 }
 ```
 
+### 2. N皇后问题
+
+#### 题目描述
+
+n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
+
+ ![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/8-queens.png) 
+
+上图为 8 皇后问题的一种解法。
+
+给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。
+
+每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
+
+**示例:**
+
+```
+输入: 4
+输出: [
+ [".Q..",  // 解法 1
+  "...Q",
+  "Q...",
+  "..Q."],
+
+ ["..Q.",  // 解法 2
+  "Q...",
+  "...Q",
+  ".Q.."]
+]
+解释: 4 皇后问题存在两个不同的解法
+```
+
+#### 代码实现
+
+**C++**
+
+```c++
+vector<vector<string>> res;
+
+/* 输入棋盘边长 n，返回所有合法的放置 */
+vector<vector<string>> solveNQueens(int n) {
+    // '.' 表示空，'Q' 表示皇后，初始化空棋盘。
+    vector<string> board(n, string(n, '.'));
+    backtrack(board, 0);
+    return res;
+}
+
+// 路径：board 中小于 row 的那些行都已经成功放置了皇后
+// 选择列表：第 row 行的所有列都是放置皇后的选择
+// 结束条件：row 超过 board 的最后一行
+void backtrack(vector<string>& board, int row) {
+    // 触发结束条件
+    if (row == board.size()) {
+        res.push_back(board);
+        return;
+    }
+
+    int n = board[row].size();
+    for (int col = 0; col < n; col++) {
+        // 排除不合法选择
+        if (!isValid(board, row, col)) 
+            continue;
+        // 做选择
+        board[row][col] = 'Q';
+        // 进入下一行决策
+        backtrack(board, row + 1);
+        // 撤销选择
+        board[row][col] = '.';
+    }
+}
+/* 是否可以在 board[row][col] 放置皇后？ */
+bool isValid(vector<string>& board, int row, int col) {
+    int n = board.size();
+    // 检查列是否有皇后互相冲突
+    for (int i = 0; i < n; i++) {
+        if (board[i][col] == 'Q')
+            return false;
+    }
+    // 检查右上方是否有皇后互相冲突
+    for (int i = row - 1, j = col + 1; 
+            i >= 0 && j < n; i--, j++) {
+        if (board[i][j] == 'Q')
+            return false;
+    }
+    // 检查左上方是否有皇后互相冲突
+    for (int i = row - 1, j = col - 1;
+            i >= 0 && j >= 0; i--, j--) {
+        if (board[i][j] == 'Q')
+            return false;
+    }
+    return true;
+}
+```
+
+**Go**
+
+```go
+func solveNQueens(n int) [][]string {
+    // LeetCode中，调用函数进行测试时，全局变量的值将一直保存，所以在每次调用函数时，需要手动清空
+    if len(result) != 0 {
+        result = [][]string{}
+    }
+    // 生成棋盘
+    board := make([][]byte, n)
+    b := []byte{}
+    for i := 0; i < n; i++ {
+        b = append(b, '.')
+    }
+    for i := 0; i < n; i++ {
+        board[i] =  append([]byte{}, b...)
+    }
+    backtrack(board, 0)
+
+    return result
+}
+
+var result [][]string
+func backtrack(board [][]byte, row int) {
+    // 终止条件
+    if row == len(board) {
+        b := bytes.Join(board, []byte(";"))
+        strs := strings.Split(string(b), ";")
+        result = append(result, strs)
+        return
+    }
+
+    for col := 0; col < len(board); col++ {
+        // 排除无效的选择
+        if !isValid(board, row, col) { continue }
+        // 做选择
+        board[row][col] = 'Q'
+        backtrack(board, row+1)
+        // 撤销选择
+        board[row][col] = '.'
+    }
+}
+
+func isValid(board [][]byte, row, col int) bool {
+    // 查找列
+    // for i := 0; i < len(board); i++ {
+    //    if i != row && board[i][col] == 'Q' {
+    //        return false
+    //    }
+    // }
+    
+    // 查找列 截止到row的位置就行了
+    for i := 0; i < row; i++ {
+        if board[i][col] == 'Q' {
+            return false
+        }
+    }
+    // 不需要查找整个 / 方向的元素，因为下半部分还没做出选择
+    // 查找右上
+    for i, j := row-1, col+1; i >= 0 && j < len(board); i, j = i-1, j+1 {
+        if board[i][j] == 'Q' {
+            return false
+        }
+    }
+    // 同理，查找左上
+    for i, j := row-1, col-1; i >= 0 && j >= 0; i, j = i-1, j-1 {
+        if board[i][j] == 'Q' {
+            return false
+        }
+    }
+
+    return true
+}
+```
+
+## 总结
+
+**写`backtrack`函数时，需要维护走过的「路径」和当前可以做的「选择列表」，当触发「结束条件」时，将「路径」记入结果集**。
+
+其实想想看，回溯算法和动态规划是不是有点像呢？我们在动态规划系列文章中多次强调，动态规划的三个需要明确的点就是「状态」「选择」和「base case」，是不是就对应着走过的「路径」，当前的「选择列表」和「结束条件」？
+
+某种程度上说，动态规划的暴力求解阶段就是回溯算法。只是有的问题具有重叠子问题性质，可以用 dp table 或者备忘录优化，将递归树大幅剪枝，这就变成了动态规划。而今天的两个问题，都没有重叠子问题，也就是回溯算法问题了，复杂度非常高是不可避免的。
+
+本文终。如果觉得本文不错的话，不妨分享给你的朋友。另外，几篇动态规划和框架思维的相关文章正在更新和修订，敬请期待。
+
+> 原文始发于微信公众号（labuladong）：[回溯算法详解（修订版）](http://mp.weixin.qq.com/s/nMUHqvwzG2LmWA9jMIHwQQ)
