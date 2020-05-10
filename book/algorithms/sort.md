@@ -94,7 +94,68 @@ func InsertionSort_Down(a []int) {
 
 
 
+## 希尔排序
+
+```shell
+func shellSort(nums []int) {
+	gap := 1
+	// 区间取值没有定论，大概是在1/2 到 1/3之间
+	for gap < len(nums) {
+		gap = gap * 3 + 1 // 1 -> 4 -> 13
+	}
+
+	for gap > 0 {
+		// 当 gap == 1时，就是插入排序
+		// 通过gap来跨区间，插排
+		for i := gap; i < len(nums); i++ { // 6
+			tmp := nums[i] // 4
+			j := i - gap // 2
+			for j >= 0 && nums[j] > tmp {
+				nums[j + gap] = nums[j]
+				j -= gap
+			}
+			nums[j + gap] = tmp
+		}
+		gap = int(math.Floor(float64(gap) / 3))
+	}
+}
+```
+
+
+
 ## 归并排序
+
+```go
+func mergeSort(A []int, p, r int) {
+	if p < r {
+		q := int(math.Floor(float64((p + r) / 2)))
+		mergeSort(A, p, q)
+		mergeSort(A, q + 1, r)
+		merge(A, p, q, r)
+	}
+}
+func merge(A []int, p, q, r int) {
+	n1 := q - p + 1
+	n2 := r - q
+	left, right := make([]int, n1 + 1), make([]int, n2 + 1)
+	copy(left, A[p:q + 1])
+	copy(right, A[q + 1:r + 1])
+	left[n1] = math.MaxInt64
+	right[n2] = math.MaxInt64
+	i, j := 0, 0
+	for k := p; k <= r; k++ {
+		if left[i] <= right[j] {
+			A[k] = left[i]
+			i++
+		} else {
+			A[k] = right[j]
+			j++
+		}
+	}
+}
+```
+
+
 
 ## 快速排序
 
@@ -127,4 +188,10 @@ func quickSort(arr []int, left, right int) {
 }
 
 ```
+
+
+
+## Reference
+
+> [这或许是东半球分析十大排序算法最好的一篇文章](https://www.cxyxiaowu.com/725.html)
 

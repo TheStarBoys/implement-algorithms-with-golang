@@ -20,6 +20,16 @@ func TestSort(t *testing.T) {
 		t.Errorf("insertionSort err: %v", err)
 	}
 
+	err = testSort(selectionSort)
+	if err != nil {
+		t.Errorf("selectionSort err: %v", err)
+	}
+
+	err = testSort(shellSort)
+	if err != nil {
+		t.Errorf("shellSort err: %v", err)
+	}
+
 	err = testSort(func(ints []int) {
 		mergeSort(ints, 0, len(ints)-1)
 	})
