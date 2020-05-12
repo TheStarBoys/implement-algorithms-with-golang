@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+	"sort"
 )
 
 func TestSort(t *testing.T) {
@@ -68,7 +69,7 @@ func testSort(f func([]int)) (err error) {
 			arr[j] = rand.Intn(1000)
 		}
 		input := append([]int{}, arr...)
-		if f(arr); isUpSorted(arr) == false {
+		if f(arr); sort.IntsAreSorted(arr) == false {
 			return errors.New(fmt.Sprintf("input: %v, output: %v, expect: upSorted", input, arr))
 		}
 	}
@@ -77,12 +78,12 @@ func testSort(f func([]int)) (err error) {
 }
 
 // 测试是否是升序排序
-func isUpSorted(nums []int) bool {
-	for i := 1; i < len(nums); i++ {
-		if nums[i-1] > nums[i] {
-			return false
-		}
-	}
-
-	return true
-}
+//func isUpSorted(nums []int) bool {
+//	for i := 1; i < len(nums); i++ {
+//		if nums[i-1] > nums[i] {
+//			return false
+//		}
+//	}
+//
+//	return true
+//}
