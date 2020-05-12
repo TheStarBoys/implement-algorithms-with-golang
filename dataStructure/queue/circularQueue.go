@@ -1,10 +1,10 @@
 package queue
-// LeetCode官方的循环链表实现golang版
+// LeetCode官方的循环队列实现golang版
 type CircularQueue struct {
-	Head int
-	Tail int
-	Data []int
-	Size int
+	head int
+	tail int
+	data []int
+	size int
 }
 
 /** Initialize your data structure here. Set the size of the queue to be k. */
@@ -19,10 +19,10 @@ func (this *CircularQueue) EnQueue(value int) bool {
 		return false
 	}
 	if this.IsEmpty() {
-		this.Head = 0
+		this.head = 0
 	}
-	this.Tail = (this.Tail + 1) % this.Size
-	this.Data[this.Tail] = value
+	this.tail = (this.tail + 1) % this.size
+	this.data[this.tail] = value
 	return true
 }
 
@@ -32,12 +32,12 @@ func (this *CircularQueue) DeQueue() bool {
 	if this.IsEmpty() {
 		return false
 	}
-	if this.Head == this.Tail {
-		this.Head = -1
-		this.Tail = -1
+	if this.head == this.tail {
+		this.head = -1
+		this.tail = -1
 		return true
 	}
-	this.Head = (this.Head + 1) % this.Size
+	this.head = (this.head + 1) % this.size
 	return true
 }
 
@@ -47,7 +47,7 @@ func (this *CircularQueue) Front() int {
 	if this.IsEmpty() {
 		return -1
 	}
-	return this.Data[this.Head]
+	return this.data[this.head]
 }
 
 
@@ -56,17 +56,17 @@ func (this *CircularQueue) Rear() int {
 	if this.IsEmpty() {
 		return -1
 	}
-	return this.Data[this.Tail]
+	return this.data[this.tail]
 }
 
 
 /** Checks whether the circular queue is empty or not. */
 func (this *CircularQueue) IsEmpty() bool {
-	return this.Head == -1
+	return this.head == -1
 }
 
 
 /** Checks whether the circular queue is full or not. */
 func (this *CircularQueue) IsFull() bool {
-	return ((this.Tail + 1) % this.Size) == this.Head
+	return ((this.tail + 1) % this.size) == this.head
 }

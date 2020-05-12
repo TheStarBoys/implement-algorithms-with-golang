@@ -24,12 +24,12 @@ func (this *MovingAverage) Next(val int) float64 {
 		this.DeQueue()
 	}
 	this.EnQueue(val)
-	if this.NumSize < this.Size {
+	if this.NumSize < this.size {
 		this.NumSize++
 	}
 	sum := 0
-	for i := 0; i < this.Size; i++ {
-		sum += this.Data[i]
+	for i := 0; i < this.size; i++ {
+		sum += this.data[i]
 	}
 	return float64(sum) / float64(this.NumSize)
 }
