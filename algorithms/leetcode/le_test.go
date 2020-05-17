@@ -9,9 +9,8 @@ import (
 )
 
 func TestLe(t *testing.T) {
-	dir, _ := os.Getwd()
-
-	fmt.Println(GetAllFile(dir))
+	//dir, _ := os.Getwd()
+	//fmt.Println(GetAllFile(dir))
 }
 
 

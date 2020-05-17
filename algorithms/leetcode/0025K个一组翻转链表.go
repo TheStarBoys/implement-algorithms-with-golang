@@ -1,5 +1,6 @@
 package leetcode
 
+// 解法一：先得到链表长度，再递归
 func reverseKGroup025_0(head *ListNode, k int) *ListNode {
 	length := 0
 	tmp := head

@@ -1,9 +1,9 @@
 package queue
-// LeetCode官方的循环链表实现golang版
+// LeetCode官方的循环队列实现golang版
 type CircularQueue struct {
 	head int
 	tail int
-	Data []interface{}
+	data []interface{}
 	size int
 }
 
@@ -22,7 +22,7 @@ func (this *CircularQueue) EnQueue(value interface{}) bool {
 		this.head = 0
 	}
 	this.tail = (this.tail + 1) % this.size
-	this.Data[this.tail] = value
+	this.data[this.tail] = value
 	return true
 }
 
@@ -47,7 +47,7 @@ func (this *CircularQueue) Front() interface{} {
 	if this.IsEmpty() {
 		return nil
 	}
-	return this.Data[this.head]
+	return this.data[this.head]
 }
 
 
@@ -56,7 +56,7 @@ func (this *CircularQueue) Rear() interface{} {
 	if this.IsEmpty() {
 		return nil
 	}
-	return this.Data[this.tail]
+	return this.data[this.tail]
 }
 
 

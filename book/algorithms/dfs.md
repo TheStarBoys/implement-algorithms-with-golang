@@ -65,3 +65,62 @@ boolean DFS(int root, int target) {
 }
 ```
 
+## 题目实战
+
+### 1. 岛屿数量
+
+#### 题目描述
+
+给你一个由 `'1'`（陆地）和 `'0'`（水）组成的的二维网格，请你计算网格中岛屿的数量。
+
+岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成。
+
+此外，你可以假设该网格的四条边均被水包围。
+
+
+
+**示例 1:**
+
+```
+输入:
+11110
+11010
+11000
+00000
+输出: 1
+```
+
+#### 代码实现
+
+```go
+func numIslands(grid [][]byte) int {
+    if len(grid) == 0 {
+        return 0
+    }
+    var count int
+    for i := 0; i < len(grid); i++ {
+        for j := 0; j < len(grid[0]); j++ {
+            if grid[i][j] == '1' {
+                count++
+                dfs(grid, i, j)
+            }
+        }
+    }
+    
+    return count
+}
+
+var dx = [4]int{-1, 1, 0, 0}
+var dy = [4]int{0, 0, -1, 1}
+func dfs(grid [][]byte, i, j int) {
+    grid[i][j] = '0'
+    for k := 0; k < 4; k++ {
+        tmp_i := i + dx[k]
+        tmp_j := j + dy[k]
+        if 0 <= tmp_i && tmp_i < len(grid) && 0 <= tmp_j && tmp_j < len(grid[0]) && grid[tmp_i][tmp_j] == '1' {
+            dfs(grid, tmp_i, tmp_j)
+        }
+    }
+}
+```
+
