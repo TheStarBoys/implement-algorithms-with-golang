@@ -14,6 +14,7 @@
 - [二叉树](./book/dataStructure/binaryTree.md)
 - [二叉搜索树](./book/dataStructure/binarySearchTree.md)
 - [N叉树](./book/dataStructure/n-aryTree.md)
+- [前缀树](./book/dataStructure/trie.md)
 
 ### 算法
 
