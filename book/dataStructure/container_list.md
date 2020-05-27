@@ -55,7 +55,7 @@ type List struct {
 }
 
 // Init initializes or clears list l.
-// 一个空的双向链表被认为是 len为0，前后指针均指向自己
+// 一个空的双向循环链表被认为是 len为0，前后指针均指向自己
 func (l *List) Init() *List {
 	l.root.next = &l.root
 	l.root.prev = &l.root

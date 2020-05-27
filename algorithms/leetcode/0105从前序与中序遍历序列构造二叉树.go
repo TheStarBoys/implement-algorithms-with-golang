@@ -19,3 +19,21 @@ func buildTree105_0(preorder []int, inorder []int) *TreeNode {
 
 	return rootNode
 }
+
+
+func buildTree105_1(preorder []int, inorder []int) *TreeNode {
+	if len(preorder) == 0  {
+		return nil
+	}
+	mid := &TreeNode{Val: preorder[0]}
+	i := 0
+	for ; i < len(inorder); i++ {
+		if inorder[i] == mid.Val {
+			break
+		}
+	}
+	mid.Left = buildTree105_1(preorder[1 : i+1], inorder[:i])
+	mid.Right = buildTree105_1(preorder[i+1 :], inorder[i+1:])
+
+	return mid
+}

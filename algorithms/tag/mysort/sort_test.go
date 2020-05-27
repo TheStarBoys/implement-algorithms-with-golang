@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"time"
 	"sort"
+	"runtime/debug"
 )
 
 func TestSort(t *testing.T) {
@@ -16,9 +17,45 @@ func TestSort(t *testing.T) {
 		t.Errorf("bubbleSort err: %v", err)
 	}
 
+	err = testSort(bucketSort2)
+	if err != nil {
+		t.Errorf("bucketSort2 err: %v", err)
+	}
+
+	err = testSort(countingSort)
+	if err != nil {
+		t.Errorf("countingSort err: %v", err)
+	}
+
+	err = testSort(countingSort2)
+	if err != nil {
+		t.Errorf("countingSort2 err: %v", err)
+	}
+
 	err = testSort(InsertionSort_Up)
 	if err != nil {
 		t.Errorf("insertionSort err: %v", err)
+	}
+
+	err = testSort(func(nums []int) {
+		mergeSort(nums, 0, len(nums)-1)
+	})
+	if err != nil {
+		t.Errorf("mergeSort err: %v", err)
+	}
+
+	err = testSort(func(nums []int) {
+		quickSort(nums, 0, len(nums)-1)
+	})
+	if err != nil {
+		t.Errorf("quickSort err: %v", err)
+	}
+
+	err = testSort(func(nums []int) {
+		quickSort2(nums, 0, len(nums)-1)
+	})
+	if err != nil {
+		t.Errorf("quickSort2 err: %v", err)
 	}
 
 	err = testSort(selectionSort)
@@ -31,22 +68,10 @@ func TestSort(t *testing.T) {
 		t.Errorf("shellSort err: %v", err)
 	}
 
-	err = testSort(func(ints []int) {
-		mergeSort(ints, 0, len(ints)-1)
-	})
-	if err != nil {
-		t.Errorf("mergeSort err: %v", err)
-	}
 
-	err = testSort(func(ints []int) {
-		quickSort(ints, 0, len(ints)-1)
-	})
-	if err != nil {
-		t.Errorf("quickSort err: %v", err)
-	}
 }
 
-func testSort(f func([]int)) (err error) {
+func testSort(f func(nums []int)) (err error) {
 	defer func() {
 		if p := recover(); p != nil {
 			str, ok := p.(string)
@@ -54,6 +79,7 @@ func testSort(f func([]int)) (err error) {
 				err = errors.New(str)
 			} else {
 				err = errors.New("panic")
+				debug.PrintStack()
 			}
 		}
 	}()
@@ -70,7 +96,7 @@ func testSort(f func([]int)) (err error) {
 		}
 		input := append([]int{}, arr...)
 		if f(arr); sort.IntsAreSorted(arr) == false {
-			return errors.New(fmt.Sprintf("input: %v, output: %v, expect: upSorted", input, arr))
+			return errors.New(fmt.Sprintf("input: %v\noutput: %v\nexpect: upSorted", input, arr))
 		}
 	}
 

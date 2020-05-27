@@ -62,3 +62,34 @@ func findDuplicate287_3(nums []int) int {
 	}
 	return tortoise
 }
+
+// 二进制
+func findDuplicate287_4(nums []int) int {
+	n := len(nums)
+	ans := 0
+	bit_max := uint(31)
+	// 找到最高有效位
+	for ((n-1) >> bit_max) == 0 {
+		bit_max--
+	}
+
+	for bit := uint(0); bit <= bit_max; bit++ {
+		// 考虑到第 i 位，我们记 nums[] 数组中二进制展开后第 i 位为 1 的数有 x 个
+		// 数字 [1,n] 这 n 个数二进制展开后第 i 位为 1 的数有 y 个
+		// 那么重复的数第 i 位为 1 当且仅当 x > y
+		x, y := 0, 0
+		for i := 0; i < n; i++ {
+			if (nums[i] & (1 << bit)) > 0 {
+				x++
+			}
+			if i >= 1 && (i & (1 << bit)) > 0 {
+				y++
+			}
+		}
+		// 按位还原
+		if x > y {
+			ans |= 1 << bit
+		}
+	}
+	return ans
+}

@@ -17,7 +17,7 @@ func longestPalindrome005_0(s string) string {
 	return maxStr
 }
 
-func isPalindrome005_0(s string, l,r int) bool {
+func isPalindrome005_0(s string, l, r int) bool {
 	for l < r {
 		if s[l] != s[r] {
 			return false
@@ -26,4 +26,25 @@ func isPalindrome005_0(s string, l,r int) bool {
 		r--
 	}
 	return true
+}
+
+func longestPalindrome005_1(s string) string {
+	if s == "" {
+		return ""
+	}
+	l, r := 0, 0
+	for i := 0; i < len(s); i++ {
+		for j := i; j >= 0; j-- {
+			// 通过这个可以减少回文判断次数
+			if i - j <= r - l {
+				continue
+			}
+			if isPalindrome005_0(s, j, i) {
+				l = j
+				r = i
+			}
+		}
+	}
+
+	return s[l:r+1]
 }

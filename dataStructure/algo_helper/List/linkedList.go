@@ -3,12 +3,12 @@ package List
 import "errors"
 
 // 单链表
-type LinkList struct {
+type LinkNode struct {
 	Data interface{}
-	Next *LinkList
+	Next *LinkNode
 }
 
-func (ll *LinkList)GetElem(i int) (interface{}, error) {
+func (ll *LinkNode)GetElem(i int) (interface{}, error) {
 	p := ll.Next
 	j := 0
 	for p != nil && j < i {
@@ -20,7 +20,7 @@ func (ll *LinkList)GetElem(i int) (interface{}, error) {
 	}
 	return nil, errors.New("index out of range")
 }
-func (ll *LinkList)ListInsert(i int, e interface{}) error{
+func (ll *LinkNode)ListInsert(i int, e interface{}) error{
 	p := ll
 	j := 0
 	for p != nil && j < i {	// 找到i结点
@@ -28,7 +28,7 @@ func (ll *LinkList)ListInsert(i int, e interface{}) error{
 		j++
 	}
 	if p != nil {
-		l := &LinkList{}
+		l := &LinkNode{}
 		l.Next = p.Next
 		p.Next = l
 		l.Data = e
@@ -36,7 +36,7 @@ func (ll *LinkList)ListInsert(i int, e interface{}) error{
 	}
 	return errors.New("index out of range")
 }
-func (ll *LinkList)ListDelete(i int) error{
+func (ll *LinkNode)ListDelete(i int) error{
 	p := ll
 	j := 0
 	for p != nil && j < i {	// 找到i结点

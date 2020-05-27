@@ -18,6 +18,7 @@
 
 ### 算法
 
+- [双指针](./book/algorithms/doublePointer.md)
 - [递归](./book/algorithms/recursiveAlgorithm.md)
 - [排序](./book/algorithms/sort.md)
 - [二分查找](https://www.cxyxiaowu.com/500.html)
