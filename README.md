@@ -21,7 +21,7 @@
 - [双指针](./book/algorithms/doublePointer.md)
 - [递归](./book/algorithms/recursiveAlgorithm.md)
 - [排序](./book/algorithms/sort.md)
-- [二分查找](https://www.cxyxiaowu.com/500.html)
+- [二分查找](./book/algorithms/binarySearch.md)
 - [贪心算法](./book/algorithms/greedyAlgorithm.md)
 - [动态规划](./book/algorithms/dynamicProgramming.md)
 - [滑动窗口](./book/algorithms/slidingWindow.md)
