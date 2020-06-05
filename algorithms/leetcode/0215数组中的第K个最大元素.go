@@ -48,10 +48,6 @@ func partition(a []int, l, h int) int {
 	return j
 }
 
-func swap(a []int, i, j int) {
-	a[i], a[j] = a[j], a[i]
-}
-
 //func FindKthLagest(a []int, k int) int{
 //	return findKthLargest(a, k)
 //}

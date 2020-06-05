@@ -3,7 +3,7 @@
 ## 数据结构定义
 
 ```go
- //Definition for a binary tree node.
+//Definition for a binary tree node.
 type TreeNode struct {
 	Val int
 	Left *TreeNode
@@ -17,13 +17,73 @@ type TreeNode struct {
 
 此章至少需要的预备知识：
 
-- [递归]()
-- [广度优先搜索]()
-- [深度优先搜索]()
+- [递归](../algorithms/recursiveAlgorithm.md)
+- [广度优先搜索](../algorithms/bfs.md)
+- [深度优先搜索](../algorithms/dfs.md)
 
-## 前序遍历
 
-### **题目描述**
+
+## 概念
+
+**高度（Height）：**
+
+节点的高度 = 节点到叶子节点的最长路径（边数）
+
+树的高度 = 根节点的高度
+
+**深度（Depth）：**
+
+节点的深度 = 根节点到这个节点所经历的边的个数
+
+**层（Level）：**
+
+节点的层数 = 节点的深度 + 1
+
+![img](https://static001.geekbang.org/resource/image/50/b4/50f89510ad1f7570791dd12f4e9adeb4.jpg) 
+
+
+
+**满二叉树：**
+
+叶子节点全部都在最底层，除叶子节点之外，每个节点都有左右两个节点。
+
+**完全二叉树：**
+
+叶子节点都在最底下**两层**，最后一层的叶子节点都**靠左**排列，并且除了最后一层，其他层的节点个数都要达到最大。
+
+对比图如下：
+
+ ![img](https://static001.geekbang.org/resource/image/18/60/18413c6597c2850b75367393b401ad60.jpg) 
+
+
+
+## 二叉树的存储
+
+### 链式存储法
+
+ ![img](https://static001.geekbang.org/resource/image/12/8e/12cd11b2432ed7c4dfc9a2053cb70b8e.jpg) 
+
+
+
+### 顺序存储法
+
+我们把根节点存储在下标 `i = 1` 的位置，那左子节点存储在下标 `2 * i = 2` 的位置，右子节点存储在 `2 * i + 1 = 3` 的位置。以此类推，`B` 节点的左子节点存储在 `2 * i = 2 * 2 = 4` 的位置，右子节点存储在` 2 * i + 1 = 2 * 2 + 1 = 5` 的位置。 
+
+ ![img](https://static001.geekbang.org/resource/image/14/30/14eaa820cb89a17a7303e8847a412330.jpg) 
+
+如果节点 `X` 存储在数组中下标为 `i` 的位置，下标为 `2 * i` 的位置存储的就是左子节点，下标为 `2 * i + 1` 的位置存储的就是右子节点。反过来，下标为 `i/2` 的位置存储就是它的父节点。通过这种方式，我们只要知道根节点存储的位置（一般情况下，为了方便计算子节点，根节点会存储在下标为 `1` 的位置），这样就可以通过下标计算，把整棵树都串起来。 
+
+不过，我刚刚举的例子是一棵完全二叉树，所以仅仅**“浪费”**了一个下标为 `0` 的存储位置。如果是非完全二叉树，其实会浪费比较多的数组存储空间。你可以看我举的下面这个例子。
+
+ ![img](https://static001.geekbang.org/resource/image/08/23/08bd43991561ceeb76679fbb77071223.jpg) 
+
+所以，如果某棵二叉树是一棵完全二叉树，那用数组存储无疑是最节省内存的一种方式。因为数组的存储方式并不需要像链式存储法那样，要存储额外的左右子节点的指针。这也是为什么完全二叉树会单独拎出来的原因，也是为什么完全二叉树要求最后一层的子节点都靠左的原因。 
+
+## 二叉树的遍历
+
+### 前序遍历
+
+#### **题目描述**
 
 给定一个二叉树，返回它的 前序 遍历。
 
@@ -40,9 +100,9 @@ type TreeNode struct {
 输出: [1,2,3]
 ```
 
-### **题目分析与代码实现**
+#### **题目分析与代码实现**
 
-#### 1. 递归
+##### 1. 递归
 
 ```go
 func preorderTraversal(root *TreeNode) []int {
@@ -61,7 +121,7 @@ func helper(root *TreeNode, ans []int) []int {
 
 
 
-#### 2. 深度优先搜索
+##### 2. 深度优先搜索
 
 ```go
 func preorderTraversal(root *TreeNode) []int {
@@ -88,7 +148,7 @@ func preorderTraversal(root *TreeNode) []int {
 
 
 
-#### 3. 莫里斯遍历
+##### 3. 莫里斯遍历
 
 ```go
 // 莫里斯遍历 如果是实时输出，空间复杂度为O(1)
@@ -120,13 +180,13 @@ func preorderTraversal(root *TreeNode) []int {
 }
 ```
 
-## 中序遍历
+### 中序遍历
 
-### 题目描述
+#### 题目描述
 
-### 题目分析与代码实现
+#### 题目分析与代码实现
 
-#### 1. 递归
+##### 1. 递归
 
 ```go
 // 递归
@@ -146,7 +206,7 @@ func helper(root *TreeNode, ans []int) []int {
 
 
 
-#### 2. 深度优先搜索
+##### 2. 深度优先搜索
 
 ```go
 func inorderTraversal(root *TreeNode) []int {
@@ -169,13 +229,13 @@ func inorderTraversal(root *TreeNode) []int {
 
 
 
-## 后序遍历
+### 后序遍历
 
-### 题目描述
+#### 题目描述
 
-### 题目分析与代码实现
+#### 题目分析与代码实现
 
-#### 1. 递归
+##### 1. 递归
 
 ```go
 func postorderTraversal(root *TreeNode) []int {
@@ -194,7 +254,7 @@ func helper(root *TreeNode, ans []int) []int {
 
 
 
-#### 2. 深度优先搜索
+##### 2. 深度优先搜索
 
 ```go
 func postorderTraversal(root *TreeNode) []int {
@@ -251,13 +311,13 @@ func postorderTraversal(root *TreeNode) []int {
 
 
 
-## 层序遍历
+### 层序遍历
 
-### 题目描述
+#### 题目描述
 
-### 题目分析与代码实现
+#### 题目分析与代码实现
 
-#### 广度优先搜索
+##### 广度优先搜索
 
 ```go
 func levelOrder(root *TreeNode) [][]int {
@@ -479,4 +539,10 @@ func helper(root *TreeNode) int {
     return int(math.Max(float64(left), float64(right))) + 1
 }
 ```
+
+
+
+## 引用
+
+> [数据结构与算法之美](https://time.geekbang.org/column/intro/126)
 
