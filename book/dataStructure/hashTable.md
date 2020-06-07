@@ -28,3 +28,199 @@
 
 链表法是一种更加常用的散列冲突解决办法，相比开放寻址法，它要简单很多。在散列表中，每个“桶（bucket）”或者“槽（slot）”会对应一条链表，所有散列值相同的元素我们都放到相同槽位对应的链表中。 
 
+
+
+## 哈希表实现
+
+### 哈希集
+
+```go
+type MyHashSet struct {
+	Set [][]int
+}
+
+
+/** Initialize your data structure here. */
+func ConstructorMyHashSet() MyHashSet {
+	set := make([][]int, 1000)
+	return MyHashSet{set}
+}
+
+
+func (this *MyHashSet) Add(key int)  {
+	bucket := key % 1000
+	if this.Contains(key) {
+		return
+	}
+	this.Set[bucket] = append(this.Set[bucket], key)
+}
+
+
+func (this *MyHashSet) Remove(key int)  {
+	bucket := key % 1000 // 0
+	for i, v := range this.Set[bucket] {
+		if key == v {
+			this.Set[bucket] = append(this.Set[bucket][:i], this.Set[bucket][i+1:]...)
+			return
+		}
+	}
+}
+
+
+/** Returns true if this set contains the specified element */
+func (this *MyHashSet) Contains(key int) bool {
+	bucket := key % 1000
+	for _, v := range this.Set[bucket] {
+		if key == v {
+			return true
+		}
+	}
+	return false
+}
+```
+
+
+
+### 哈希表
+
+```go
+type MyHashMap struct {
+	Maps [][]pair
+}
+type pair struct {
+	key int
+	value int
+}
+
+var maxLen = 100 * 1000
+/** Initialize your data structure here. */
+func ConstructorMyHashMap() MyHashMap {
+	maps := make([][]pair, maxLen)
+	return MyHashMap{maps}
+}
+
+
+/** value will always be non-negative. */
+func (this *MyHashMap) Put(key int, value int)  {
+	bucket := getIndex(key)
+	if i := this.getPos(bucket, key); i == -1 {
+		this.Maps[bucket] = append(this.Maps[bucket], pair{key, value})
+	} else {
+		this.Maps[bucket][i].value = value
+	}
+
+}
+
+
+/** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+func (this *MyHashMap) Get(key int) int {
+	bucket := getIndex(key)
+	if i := this.getPos(bucket, key); i != -1 {
+		return this.Maps[bucket][i].value
+	}
+	return -1
+}
+
+
+/** Removes the mapping of the specified value key if this map contains a mapping for the key */
+func (this *MyHashMap) Remove(key int)  {
+	bucket := getIndex(key)
+	if i := this.getPos(bucket, key); i != -1 {
+		this.Maps[bucket] = append(this.Maps[bucket][:i], this.Maps[bucket][i+1:]...)
+	}
+}
+
+func getIndex(key int) int {
+	return key % 100 * 1000
+}
+
+func (this *MyHashMap)getPos(bucket, key int) int {
+	for i, v := range this.Maps[bucket] {
+		if v.key == key {
+			return i
+		}
+	}
+	return -1
+}
+```
+
+## 应用
+
+### 如何判断一个元素在亿级数据中是否存在？
+
+```go
+type BloomFilter struct {
+	data []int
+}
+
+func NewBloomFilter(size int) *BloomFilter {
+	return &BloomFilter{
+		data: make([]int, size),
+	}
+}
+
+func (bf *BloomFilter) Add(data string) {
+	first := bf.hashcode1(data)
+	second := bf.hashcode2(data)
+	third := bf.hashcode3(data)
+
+	bf.data[first % len(data)] = 1
+	bf.data[second % len(data)] = 1
+	bf.data[third % len(data)] = 1
+}
+
+func (bf *BloomFilter) MightContain(data string) bool {
+	first := bf.hashcode1(data)
+	second := bf.hashcode2(data)
+	third := bf.hashcode3(data)
+
+	if bf.data[first % len(data)] == 0 {
+		return false
+	}
+	if bf.data[second % len(data)] == 0 {
+		return false
+	}
+	if bf.data[third % len(data)] == 0 {
+		return false
+	}
+
+	return true
+}
+
+func (bf *BloomFilter) hashcode1(data string) int {
+	hash := 0
+	for i := 0; i < len(data); i++ {
+		hash = 33 * hash + int(data[i])
+	}
+
+	return int(math.Abs(float64(hash)))
+}
+
+func (bf *BloomFilter) hashcode2(data string) int {
+	p := 16777619
+	hash := 2166136261
+	for i := 0; i < len(data); i++ {
+		hash = (hash ^ int(data[i])) * p
+	}
+	hash += hash << 13
+	hash ^= hash >> 7
+	hash += hash << 3
+	hash ^= hash >> 17
+	hash += hash << 5
+	return int(math.Abs(float64(hash)))
+}
+
+func (bf *BloomFilter) hashcode3(data string) int {
+	var hash int
+	for i := 0; i < len(data); i++ {
+		hash += int(data[i])
+		hash += hash << 10
+		hash ^= hash >> 6
+	}
+	hash += hash << 3
+	hash ^= hash >> 11
+	hash += hash << 15
+	return int(math.Abs(float64(hash)))
+}
+```
+

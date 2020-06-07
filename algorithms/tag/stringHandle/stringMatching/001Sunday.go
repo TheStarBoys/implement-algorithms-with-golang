@@ -1,9 +1,9 @@
-package 字符串处理
+package stringMatching
 
 import "strings"
 
 // sunday算法，字符串模式匹配
-func Sunday(str, sub string) int{
+func SundaySearch(str, sub string) int{
 	cur := 0 // 指向当前str和sub对齐的位置
 	stri, subi := 0, 0 // 双指针，分别指向str, sub
 	Flag :

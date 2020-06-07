@@ -1,4 +1,4 @@
-package 字符串处理
+package stringHandle
 
 import "strings"
 
