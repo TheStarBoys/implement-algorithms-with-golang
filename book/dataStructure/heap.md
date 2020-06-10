@@ -298,12 +298,49 @@ for h.Len() > 0 {
 完整版的实现：
 
 ```go
-import "container/heap"
+package priorityQueue
 
-// Node 队列节点
-type Node struct {
+import (
+	"container/heap"
+)
+
+// Push等操作传入Node接口，使得优先级队列支持扩展不同的结点
+type Node interface {
+	GetValue() interface{}
+	GetPriority() int
+}
+
+// QNode 队列节点
+type QNode struct {
 	value    interface{}
 	priority int // 优先级
+}
+
+func (q QNode) GetValue() interface{} {
+	return q.value
+}
+
+func (q QNode) GetPriority() int {
+	return q.priority
+}
+
+type myHeapInterface interface {
+	heap.Interface
+	Top() interface{}
+}
+
+type reverse struct {
+	myHeapInterface
+}
+
+func (r *reverse) Less(i, j int) bool {
+	return r.myHeapInterface.Less(j, i)
+}
+
+func Reverse(p myHeapInterface) *reverse {
+	return &reverse{
+		myHeapInterface: p,
+	}
 }
 
 // 实现堆接口
@@ -312,7 +349,7 @@ type myheap []Node
 func (h myheap) Len() int { return len(h) }
 // 如果是大于等于，那么相同优先级的，先进的将先出
 // 如果是大于，那么相同优先级的，后进的先出
-func (h myheap) Less(i, j int) bool { return h[i].priority >= h[j].priority }
+func (h myheap) Less(i, j int) bool { return h[i].GetPriority() >= h[j].GetPriority() }
 func (h myheap) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
 
 func (h *myheap) Push(v interface{}) {
@@ -330,13 +367,18 @@ func (h myheap) Top() (v interface{}) {
 
 // PriorityQueue 优先级队列
 type PriorityQueue struct {
-	heap *myheap
+	heap myHeapInterface // 堆是一个接口
 	capacity int
 }
 
-func NewPriorityQueue(capacity int) PriorityQueue {
+// 可以自定义堆的实现，结点Node在堆中是以数组还是链表等数据结构存储取决于你的实现
+// 允许缺省实现
+func NewPriorityQueue(heapInterface myHeapInterface, capacity int) PriorityQueue {
+	if heapInterface == nil {
+		heapInterface = new(myheap)
+	}
 	return PriorityQueue{
-		heap: new(myheap),
+		heap: heapInterface,
 		capacity: capacity,
 	}
 }
@@ -355,21 +397,258 @@ func (q *PriorityQueue) Push(node Node) {
 }
 
 // Pop 出队
-func (q *PriorityQueue) Pop() *Node {
+func (q *PriorityQueue) Pop() Node {
 	if q.Len() == 0 {
 		return nil
 	}
 	node :=  heap.Pop(q.heap).(Node)
-	return &node
+	return node
 }
 
 // Front 获取队首节点
-func (q *PriorityQueue) Front() *Node {
+func (q *PriorityQueue) Front() Node {
 	if q.Len() == 0 {
 		return nil
 	}
 	node := q.heap.Top().(Node)
-	return &node
+	return node
+}
+```
+
+#### 应用
+
+##### 赫夫曼编码
+
+```go
+func TestHuffman(t *testing.T) {
+	/*
+	  	    	x
+	    	   / \
+	          x   a
+	         / \
+	        x   c
+	       / \
+	      b   d
+	 */
+	data := []rune("abaaccd")
+	table := map[rune]int{}
+	for _, r := range data {
+		table[r]++
+	}
+	root := getHuffmanRoot(table)
+	fmt.Println()
+	fmt.Println("----- Level Order ----")
+	root.LevelOrder()
+	// Output:
+	// -----Level Order----
+	// {2147483647, 7}
+	// {2147483647, 4} {97, 3}
+	// {2147483647, 2} {99, 2}
+	// {98, 1} {100, 1}
+
+	fmt.Println("----- Huffman Code ---")
+	res := HuffmanCoding(data)
+	type hf struct {
+		r rune
+		code string
+	}
+
+	slice := []*hf{}
+	for r, code := range res {
+		slice = append(slice, &hf{r, code})
+	}
+	sort.Slice(slice, func(i, j int) bool {
+		if slice[i].code > slice[j].code {
+			return true
+		}
+		return false
+	})
+	for _, v := range slice {
+		fmt.Printf("%c : %s\n", v.r, v.code)
+	}
+	// Output:
+	// ----- Huffman Code ---
+	// a : 1
+	// c : 01
+	// d : 001
+	// b : 000
+
+	encodeStr, encodeRule := HuffmanEncode(data)
+	fmt.Printf("Huffman Encode String: %s\n", encodeStr)
+	decodeStr := HuffmanDecode(encodeStr, encodeRule)
+	fmt.Printf("Huffman Decode String: %s\n", decodeStr)
+
+	// Output:
+	// Huffman Encode String: 110111110000100101
+	// Huffman Decode String: abaaccde
+
+	f := func(data []rune) {
+		rawStr := string(data)
+		encodeStr, encodeRule := HuffmanEncode(data)
+		decodeStr := HuffmanDecode(encodeStr, encodeRule)
+		if rawStr != decodeStr {
+			t.Errorf("expect equal, actual: rawStr: %s, decodeStr: %s\n", rawStr, decodeStr)
+		}
+	}
+
+	f([]rune("f"))
+	f([]rune(""))
+	for i := 0; i < 100; i++ {
+		length := rand.Intn(100) + 1
+		data := make([]rune, length)
+		for i := range data {
+			b := rand.Intn(25) + 97 // 生成小写字母
+			data[i] = rune(b)
+		}
+		fmt.Println("rawStr:", string(data))
+		f(data)
+	}
+}
+
+type HuffmanNode struct {
+	*QNode // 组合得到基本的优先级队列结点特性
+	left *HuffmanNode
+	right *HuffmanNode
+}
+
+// r 字符, f 频率
+func NewHuffmanNode(r rune, f int, left, right *HuffmanNode) *HuffmanNode {
+	return &HuffmanNode{
+		&QNode{r, f},
+		left,
+		right,
+	}
+}
+
+func (n *HuffmanNode) LevelOrder() {
+	queue := []*HuffmanNode{}
+	queue = append(queue, n)
+	for len(queue) > 0 {
+		length := len(queue)
+		for i := 0; i < length; i++ {
+			cur := queue[0]
+			queue = queue[1:]
+			fmt.Printf("{%v, %d} ", cur.value, cur.priority)
+			if cur.left != nil {
+				queue = append(queue, cur.left)
+			}
+			if cur.right != nil {
+				queue = append(queue, cur.right)
+			}
+		}
+		fmt.Println()
+	}
+}
+
+// HuffmanEncode 编码，不支持过短的字符串
+func HuffmanEncode(data []rune) (string, map[rune]string) {
+	if len(data) == 0 {
+		// 不需要编码
+		return "", nil
+	}
+	var res string
+	table := HuffmanCoding(data)
+	for _, r := range data {
+		res += table[r]
+	}
+
+	return res, table
+}
+
+// HuffmanDecode 解码。传入编码后的字符串，跟编码规则
+func HuffmanDecode(encodeStr string, encodeRule map[rune]string) string {
+	if encodeStr == "" {
+		return ""
+	}
+	var (
+		res string
+		maxCodeLength int // 最长编码长度
+	)
+	decodeRule := map[string]rune{}
+	for r, code := range encodeRule {
+		if maxCodeLength < len(code) {
+			maxCodeLength = len(code)
+		}
+		decodeRule[code] = r
+	}
+	prevIndx := 0
+
+	for i := 0; i < len(encodeStr); {
+		// 找到最长可解码二进制
+		j := prevIndx + maxCodeLength - 1
+		if j >= len(encodeStr) {
+			j = len(encodeStr) - 1
+		}
+		for ; j >= prevIndx; j-- {
+			code := encodeStr[prevIndx:j+1]
+			_, ok := decodeRule[code]
+			if ok {
+				break
+			}
+		}
+		j++
+		r := encodeStr[prevIndx:j]
+		res += string(decodeRule[r])
+		prevIndx = j
+		i = j
+	}
+
+	return res
+}
+
+// HuffmanCoding 获取编码规则
+func HuffmanCoding(data []rune) map[rune]string {
+	// 统计频率
+	table := map[rune]int{}
+	for _, r := range data {
+		table[r]++
+	}
+	if len(table) == 1 {
+		return map[rune]string{
+			data[0]: "0",
+		}
+	}
+	node := getHuffmanRoot(table)
+	res := map[rune]string{}
+	getCoding(node, "", res)
+
+	return res
+}
+
+// getCoding 返回字符对应的编码
+func getCoding(node *HuffmanNode, code string, table map[rune]string) {
+	if node == nil {
+		return
+	}
+	if node != nil && node.left == nil && node.right == nil {
+		r := node.GetValue().(rune)
+		table[r] = code
+		return
+	}
+	getCoding(node.left, code + "0", table)
+	getCoding(node.right, code + "1", table)
+}
+
+func getHuffmanRoot(data map[rune]int) *HuffmanNode {
+	queue := NewPriorityQueue(Reverse(new(myheap)), len(data))
+	for r, f := range data {
+		node := NewHuffmanNode(r, f, nil, nil)
+		queue.Push(node)
+	}
+	for queue.Len() > 1 {
+		left := queue.Pop().(*HuffmanNode)
+		right := queue.Pop().(*HuffmanNode)
+		if left.value.(rune) != rune(math.MaxInt32) {
+			left, right = right, left
+		}
+
+		node := NewHuffmanNode(rune(math.MaxInt32), left.GetPriority() + right.GetPriority(), left, right)
+		queue.Push(node)
+	}
+
+	node := queue.Pop().(*HuffmanNode)
+
+	return node
 }
 ```
 

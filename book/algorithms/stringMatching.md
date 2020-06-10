@@ -38,12 +38,12 @@ func BFSearch(str, sub string) int {
 
 ### 复杂度分析
 
-时间复杂度：`O(n * m)`
+**时间复杂度**：`O(n * m)`
 
 - 极端情况下，每次将比对 `n - m + 1` 次，每次将比对 `m` 个字符
 - 实际软件开发中，大部分情况下，模式串和主串长度不会太长。而且每次模式串与主串中的子串匹配的时候，当中途不能匹配的时候，就可以停止了，不需要比对 `m` 个字符，所以统计意义上，时间复杂度比 `O(n * m)` 要低很多
 
-空间复杂度：`O(1)`
+**空间复杂度**：`O(1)`
 
 ## RK算法
 
@@ -186,7 +186,7 @@ func pow(x int) int {
 
 ### 复杂度分析
 
-时间复杂度：`O(n)`
+**时间复杂度**：`O(n)`
 
 -  如果不存在哈希冲突
   - 整个 RK 算法包含两部分 
@@ -198,11 +198,15 @@ func pow(x int) int {
 - 如果存在哈希冲突
   - 哈希算法的冲突概率要相对控制得低一些，如果存在大量冲突，就会导致 RK 算法的时间复杂度退化，效率下降。极端情况下，如果存在大量的冲突，每次都要再对比子串和模式串本身，那时间复杂度就会退化成 `O(n*m)`。但也不要太悲观，一般情况下，冲突不会很多，RK 算法的效率还是比 BF 算法高的 
 
-空间复杂度：`O(1)`
+**空间复杂度**：`O(1)`
 
 - 尽管进行 `math.Pow()` 运算时转换成了查表法获取值，但powTable大小并不随数据规模增大而增大，所以仍然是常量级的空间。
 
 ## BM算法
+
+### 简介
+
+BM（Boyer-Moore）算法。它是一种非常高效的字符串匹配算法，有实验统计，它的性能是著名的 KMP 算法的 3 到 4 倍。 
 
 ### 代码实现
 
@@ -304,18 +308,115 @@ func max(x, y int) int {
 
 ### 复杂度分析
 
-时间复杂度：
+**时间复杂度**：
 
 - 实际上，BM 算法的时间复杂度分析起来是非常复杂，这篇论文“[A new proof of the linearity of the Boyer-Moore string searching algorithm](http://dl.acm.org/citation.cfm?id=1382431.1382552)”证明了在最坏情况下，BM 算法的比较次数上限是 5n。
 - 这篇论文“[Tight bounds on the complexity of the Boyer-Moore string matching algorithm](https://dl.acm.org/doi/10.5555/127787.127830)”证明了在最坏情况下，BM 算法的比较次数上限是 3n。
 
-空间复杂度：
+**空间复杂度**：
 
 - 整个算法用到了额外的 3 个数组，其中 bc 数组的大小跟字符集大小有关，suffix 数组和 prefix 数组的大小跟模式串长度 m 有关。 
 
 ## KMP算法
 
+### 简介
 
+KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的，算法的全称是 Knuth Morris Pratt 算法，简称为 KMP 算法。 
+
+在模式串和主串匹配的过程中，把不能匹配的那个字符仍然叫作**坏字符**，把已经匹配的那段字符串叫作**好前缀**。 
+
+为了表述起来方便，我把好前缀的所有后缀子串中，最长的可匹配前缀子串的那个后缀子串，叫作**最长可匹配后缀子串**；对应的前缀子串，叫作**最长可匹配前缀子串**。 
+
+KMP 算法也可以提前构建一个数组，用来存储模式串中每个前缀（这些前缀都有可能是好前缀）的最长可匹配前缀子串的结尾字符下标。我们把这个数组定义为 **next 数组**，很多书中还给这个数组起了一个名字，叫**失效函数**（failure function）。 
+
+ ![img](https://static001.geekbang.org/resource/image/9e/ad/9e59c0973ffb965abdd3be5eafb492ad.jpg) 
+
+数组的下标是每个前缀结尾字符下标，数组的值是这个前缀的最长可以匹配前缀子串的结尾字符下标。这句话有点拗口，我举了一个例子，你一看应该就懂了。 
+
+ ![img](https://static001.geekbang.org/resource/image/16/a8/1661d37cb190cb83d713749ff9feaea8.jpg) 
+
+### 代码实现
+
+```go
+func KMPSearch(mainStr, patternStr string) int {
+	return kmp(mainStr, patternStr, len(mainStr), len(patternStr))
+}
+
+// n, m分别为主串和模式串长度
+func kmp(mainStr, patternStr string, n, m int) int {
+	next := getNexts(patternStr, m)
+	j := 0
+	for i := 0; i < n; i++ {
+		// 当有好前缀 并且 此时主串和模式串出现坏字符时
+		for j > 0 && mainStr[i] != patternStr[j] {
+			// 从next数组中获取好前缀[0, j-1] 可匹配的最长前缀子串结尾下标
+			j = next[j - 1] + 1
+		}
+		if mainStr[i] == patternStr[j] {
+			j++
+		}
+		if j == m {
+			return i - m + 1
+		}
+	}
+
+	return -1
+}
+
+// next数组，前缀结束下标 : 最长可匹配前缀子串结尾字符下标
+// 例如：模式串：ababacd
+// 模式串前缀（好前缀候选） 前缀结尾字符下标 最长可匹配...下标
+// a							0 		: 		-1
+// ab							1 		: 		-1
+// aba							2 		: 		 0
+// abab							3 		: 		 1
+// ababa						4 		: 		 2
+// ababac						5 		: 		-1
+
+// 以其中 abab 好前缀候选为例：
+// 后缀	前缀		可匹配结尾下标
+// b	a		-1 // 自己不能跟自己匹配
+// ab	ab		 1
+// bab	aba		-1
+// abab	abab	-1 // 自己不能跟自己匹配
+// 最长结尾下标 --> 1
+func getNexts(patternStr string, m int) []int {
+	next := make([]int, m)
+	next[0] = -1
+	k := -1
+	// i 为好前缀候选结尾字符下标, next[m - 1] 的值其实肯定为 -1
+	for i := 1; i < m; i++ {
+		for k != -1 && patternStr[k + 1] != patternStr[i] {
+			k = next[k]
+		}
+		// 如果相等，说明子串 [0, k+1] 就是 模式串[0, i]的最长可匹配前缀子串
+		if patternStr[k + 1] == patternStr[i] {
+			k++
+		}
+		next[i] = k
+	}
+
+	return next
+}
+```
+
+### 复杂度分析
+
+**时间复杂度**：`O(n+m)`
+
+KMP 算法包含两部分 
+
+- 第一部分：构建 next 数组 
+  - 我们可以找一些参照变量，i 和 k。i 从 1 开始一直增加到 m，而 k 并不是每次 for 循环都会增加，所以，k 累积增加的值肯定小于 m。
+  - 而 while 循环里 `k=next[k]`，实际上是在减小 k 的值，k 累积都没有增加超过 m，所以 while 循环里面 `k=next[k]` 总的执行次数也不可能超过 m。因此，next 数组计算的时间复杂度是 `O(m)`。 
+- 第二部分：借助 next 数组匹配 
+  - i 从 0 循环增长到 n-1，j 的增长量不可能超过 i，所以肯定小于 n。而 while 循环中的那条语句 `j=next[j-1]+1`，不会让 j 增长的
+  - 那有没有可能让 j 不变呢？也没有可能。因为 `next[j-1]` 的值肯定小于 j-1，所以 while 循环中的这条语句实际上也是在让 j 的值减少。
+  - 而 j 总共增长的量都不会超过 n，那减少的量也不可能超过 n，所以 while 循环中的这条语句总的执行次数也不会超过 n，所以这部分的时间复杂度是 `O(n)`。 
+
+**空间复杂度**：`O(m)`
+
+KMP 算法只需要一个额外的 next 数组，数组的大小跟模式串相同。所以空间复杂度是 `O(m)`，m 表示模式串的长度。 
 
 ## Sunday算法
 
