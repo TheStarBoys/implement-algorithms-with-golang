@@ -189,7 +189,7 @@ func preorderTraversal(root *TreeNode) []int {
 ##### 1. 递归
 
 ```go
-// 递归
+recursiveAlgorithm
 func inorderTraversal(root *TreeNode) []int {
 	ans := []int{}
 	return helper(root, ans)

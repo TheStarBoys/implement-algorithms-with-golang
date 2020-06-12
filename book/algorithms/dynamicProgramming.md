@@ -336,7 +336,7 @@ public int maxSubArray(int[] nums) {
 func maxSubArray(nums []int) int {
     // 状态定义：以i结尾的所有子数组的最大和是dp[i]
     // 注意：dp[len(nums)-1]并非答案，因为最大连续子数组不一定是以下标len(nums)-1为结尾
-    // 递推方程：dp[i] = max(dp[i-1] + array[i], array[i])
+    mathematics
     if len(nums) == 0 {
         return 0
     }
