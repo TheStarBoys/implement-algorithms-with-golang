@@ -1,7 +1,5 @@
 package stringMatching
 
-import "strings"
-
 // sunday算法，字符串模式匹配
 func SundaySearch(str, sub string) int{
 	cur := 0 // 指向当前str和sub对齐的位置
@@ -35,9 +33,4 @@ func SundaySearch(str, sub string) int{
 		return cur
 	}
 	return -1
-}
-
-// 去掉所有空格
-func MyTrimSpace(s string) string{
-	return strings.ReplaceAll(s, " ", "")
 }

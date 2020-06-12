@@ -152,6 +152,7 @@ func TestPriorityQueue(t *testing.T) {
 	for h.Len() > 0 {
 		fmt.Printf("%d ", sdHeap.Pop(h))
 	}
+	fmt.Println()
 	// Output:
 	// 3 2 1
 }

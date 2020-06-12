@@ -1,5 +1,6 @@
 package binaryTree
 
+// todo
 type Serializer interface {
 	Serialize() string
 }
