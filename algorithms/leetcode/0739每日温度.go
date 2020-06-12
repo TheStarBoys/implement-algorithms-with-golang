@@ -1,7 +1,7 @@
 package leetcode
 
 // 单调栈，逆序遍历
-func dailyTemperatures739_0(T []int) []int {
+func dailyTemperatures0739_0(T []int) []int {
 	res := make([]int, len(T))
 	stack := make([]int, 0) // 单调栈，非递增排序
 
@@ -21,4 +21,57 @@ func dailyTemperatures739_0(T []int) []int {
 	}
 	return res
 
+}
+
+// 单调栈，正序遍历
+func dailyTemperatures0739_1(T []int) []int {
+	if len(T) == 0 {
+		return []int{}
+	}
+
+	ans := make([]int, len(T))
+	stack := make([]int, 0, len(T))
+	for i := 0; i < len(T); i++ {
+		for len(stack) > 0 && T[stack[len(stack)-1]] < T[i] {
+			prevIndx := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			ans[prevIndx] = i - prevIndx
+		}
+		stack = append(stack, i)
+	}
+
+	return ans
+}
+
+// 逆序遍历
+func dailyTemperatures0739_2(T []int) []int {
+	if len(T) == 0 {
+		return []int{}
+	}
+	var (
+		n = len(T)
+		res = make([]int, n)
+		maxVal = T[n-1]
+		maxIndx = n - 1
+	)
+
+	for i := len(T) - 2; i >= 0; i-- {
+		if maxVal <= T[i] {
+			maxVal = T[i]
+			maxIndx = i
+		}
+		if T[i] >= maxVal {
+			continue
+		}
+		day := 1
+		for j := i+1; j <= maxIndx; j++ {
+			if T[i] < T[j] {
+				res[i] = day
+				break
+			}
+			day++
+		}
+	}
+
+	return res
 }

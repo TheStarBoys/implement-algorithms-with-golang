@@ -133,6 +133,7 @@ func NewHuffmanNode(r rune, f int, left, right *HuffmanNode) *HuffmanNode {
 	}
 }
 
+// LevelOrder 层序遍历该二叉树
 func (n *HuffmanNode) LevelOrder() {
 	queue := []*HuffmanNode{}
 	queue = append(queue, n)
@@ -153,19 +154,19 @@ func (n *HuffmanNode) LevelOrder() {
 	}
 }
 
-// HuffmanEncode 编码，不支持过短的字符串
+// HuffmanEncode 编码
 func HuffmanEncode(data []rune) (string, map[rune]string) {
 	if len(data) == 0 {
 		// 不需要编码
 		return "", nil
 	}
 	var res string
-	table := HuffmanCoding(data)
+	rule := HuffmanCoding(data)
 	for _, r := range data {
-		res += table[r]
+		res += rule[r]
 	}
 
-	return res, table
+	return res, rule
 }
 
 // HuffmanDecode 解码。传入编码后的字符串，跟编码规则
@@ -174,9 +175,11 @@ func HuffmanDecode(encodeStr string, encodeRule map[rune]string) string {
 		return ""
 	}
 	var (
-		res string
+		res string // 解码结果
 		maxCodeLength int // 最长编码长度
+		prevIndx int // 前一个可解码的编码的结尾下标
 	)
+	// 根据编码规则，生成对应的解码规则
 	decodeRule := map[string]rune{}
 	for r, code := range encodeRule {
 		if maxCodeLength < len(code) {
@@ -184,16 +187,20 @@ func HuffmanDecode(encodeStr string, encodeRule map[rune]string) string {
 		}
 		decodeRule[code] = r
 	}
-	prevIndx := 0
 
 	for i := 0; i < len(encodeStr); {
 		// 找到最长可解码二进制
+		// j 取值范围 [prevIndx : prevIndx + maxCodeLength - 1]
 		j := prevIndx + maxCodeLength - 1
+		// 如果生成的可取值范围超过了编码的长度
 		if j >= len(encodeStr) {
+			// 取值范围变为 [prevIndx : len(encodeStr) - 1]
 			j = len(encodeStr) - 1
 		}
 		for ; j >= prevIndx; j-- {
+			// code 待解码数据
 			code := encodeStr[prevIndx:j+1]
+			// 查询是否有对应的解码规则
 			_, ok := decodeRule[code]
 			if ok {
 				break
@@ -209,7 +216,7 @@ func HuffmanDecode(encodeStr string, encodeRule map[rune]string) string {
 	return res
 }
 
-// HuffmanCoding 获取编码规则
+// HuffmanCoding 获取编码规则，出现频率高的字符，编码长度应该尽可能的短，并且无歧义
 func HuffmanCoding(data []rune) map[rune]string {
 	// 统计频率
 	table := map[rune]int{}
@@ -229,6 +236,8 @@ func HuffmanCoding(data []rune) map[rune]string {
 }
 
 // getCoding 返回字符对应的编码
+// 二叉树左节点权值为0，右节点权值为1
+// 达到叶子节点时所经过的节点的权值拼接的结果，就是该叶子节点的编码
 func getCoding(node *HuffmanNode, code string, table map[rune]string) {
 	if node == nil {
 		return
@@ -242,19 +251,24 @@ func getCoding(node *HuffmanNode, code string, table map[rune]string) {
 	getCoding(node.right, code + "1", table)
 }
 
+// getHuffmanRoot 返回其根节点
+// 将数据排成优先级队列，每取出两个节点，构造一个新的节点，作为它们的父节点，最终形成一颗二叉树
 func getHuffmanRoot(data map[rune]int) *HuffmanNode {
+	// 优先级队列，用频率表示优先级，数值小的优先
 	queue := NewPriorityQueue(Reverse(new(myheap)), len(data))
 	for r, f := range data {
 		node := NewHuffmanNode(r, f, nil, nil)
 		queue.Push(node)
 	}
+	// 由于每次取两个节点，生成一个新节点，最终必定只剩一个节点，故将其作为终止条件
 	for queue.Len() > 1 {
+		// 从优先级队列中每次取两个节点
 		left := queue.Pop().(*HuffmanNode)
 		right := queue.Pop().(*HuffmanNode)
 		if left.value.(rune) != rune(math.MaxInt32) {
 			left, right = right, left
 		}
-
+		// 创建一个新的节点，将新取出的节点作为该节点的左右孩子节点，该节点的频率为孩子节点频率之和
 		node := NewHuffmanNode(rune(math.MaxInt32), left.GetPriority() + right.GetPriority(), left, right)
 		queue.Push(node)
 	}

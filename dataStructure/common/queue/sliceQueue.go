@@ -1,25 +1,25 @@
 package queue
-// 可以动态扩容的queue
-type Queue struct {
+// 可以动态扩容的SliceQueue
+type SliceQueue struct {
 	Data []interface{}
 	size int
 }
-func NewQueue() *Queue {
-	return &Queue{}
+func NewSliceQueue() *SliceQueue {
+	return &SliceQueue{}
 }
-func (this *Queue) Enqueue(val interface{}) {
+func (this *SliceQueue) Enqueue(val interface{}) {
 	this.Data = append(this.Data, val)
 	this.size++
 }
 
-func (this *Queue) Dequeue() {
+func (this *SliceQueue) Dequeue() {
 	this.Data = this.Data[1:]
 	this.size--
 }
 
 
-/** Get the last item from the Queue. */
-func (this *Queue) Rear() interface{} {
+/** Get the last item from the queue. */
+func (this *SliceQueue) Rear() interface{} {
 	if this.IsEmpty() {
 		return nil
 	}
@@ -27,7 +27,7 @@ func (this *Queue) Rear() interface{} {
 }
 
 
-/** Checks whether the circular Queue is empty or not. */
-func (this *Queue) IsEmpty() bool {
+/** Checks whether the circular queue is empty or not. */
+func (this *SliceQueue) IsEmpty() bool {
 	return this.size == 0
 }
