@@ -161,3 +161,28 @@ func isCommonPrefix014_5(l, h int, strs []string) bool {
 	}
 	return true
 }
+
+// 二分查找，或许是更易懂的形式
+func longestCommonPrefix014_6(strs []string) string {
+	if len(strs) == 0 {
+		return ""
+	}
+	minLen := len(strs[0])
+	for i := 1; i < len(strs); i++ {
+		if minLen > len(strs[i]) {
+			minLen = len(strs[i])
+		}
+	}
+	l, h := 0, minLen - 1
+	mid := l + ((h - l) >> 1)
+	if isCommonPrefix014_5(l, mid, strs) {
+		if mid == minLen - 1 || isCommonPrefix014_5(l, mid+1, strs) == false {
+			return strs[0][:mid+1]
+		} else {
+			l = mid + 1
+		}
+	} else {
+		h = mid - 1
+	}
+	return ""
+}

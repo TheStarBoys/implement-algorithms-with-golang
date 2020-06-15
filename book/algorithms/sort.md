@@ -66,6 +66,50 @@ func bucketSort(nums []int) {
 }
 ```
 
+时间复杂度：`O(n*log(n/m))`
+
+空间复杂度：`O(m)`
+
+
+```go
+// 如果要排序的数据有 n 个，我们把它们均匀地划分到 m 个桶内，每个桶里就有 k=n/m 个元素。
+// 每个桶内部使用快速排序，时间复杂度为 O(k * logk)。m 个桶排序的时间复杂度就是 O(m * k * logk)，因为 k=n/m
+// 所以整个桶排序的时间复杂度就是 O(n*log(n/m))。
+// 当桶的个数 m 接近数据个数 n 时，log(n/m) 就是一个非常小的常量，这个时候桶排序的时间复杂度接近 O(n)
+func bucketSort2(arr []int) {
+	n := len(arr)
+	if n <= 1 {
+		return
+	}
+	// 找到最大值
+	max := arr[0]
+	for i := 1; i < n; i++ {
+		if max < arr[i] {
+			max = arr[i]
+		}
+	}
+
+	buckets := make([][]int, n)
+
+	for i := 0; i < n; i++ {
+		// arr[i] 的取值范围：[0, max]
+		// arr[i] * (n-1) 的取值范围：[0, max*(n-1)]
+		// arr[i] * (n - 1) / max 的取值范围：[0, n-1]
+		index := arr[i] * (n - 1) / max // 桶序号
+		buckets[index] = append(buckets[index], arr[i]) // 加入到对应的桶中
+	}
+
+	index := 0 // 标记数组位置
+	for i := 0; i < n; i++ {
+		if len(buckets[i]) > 0 {
+			quickSort2(buckets[i], 0, len(buckets[i])-1) // 桶内快排
+			copy(arr[index:], buckets[i])
+			index += len(buckets[i])
+		}
+	}
+}
+```
+
 
 
 ## 插入排序
@@ -205,7 +249,7 @@ func quickSort(arr []int, left, right int) {
 
 
 
-## Reference
+## 引用
 
 > [这或许是东半球分析十大排序算法最好的一篇文章](https://www.cxyxiaowu.com/725.html)
 

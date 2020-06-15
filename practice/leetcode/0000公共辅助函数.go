@@ -1,5 +1,7 @@
 package leetcode
 
+import "fmt"
+
 func min(x, y int) int {
 	if x < y {
 		return x
@@ -65,4 +67,40 @@ func quickMulti2(A, B int) int {
 // 交换切片 i, j 下标的值
 func swap(a []int, i, j int) {
 	a[i], a[j] = a[j], a[i]
+}
+
+/*
+Input:
+	matrix := [][]int{
+		{1, 3, 5, 9},
+		{2, 1, 3, 4},
+		{5, 2, 6, 7},
+		{6, 8, 4, 3},
+	}
+Output:
+	{
+		{1,	3,	5,	9},
+		{2,	1,	3,	4},
+		{5,	2,	6,	7},
+		{6,	8,	4,	3},
+	}
+ */
+func printMatrix(matrix [][]int) {
+	fmt.Println("{")
+	for i := 0; i < len(matrix); i++ {
+		fmt.Printf("\t{")
+		for j := 0; j < len(matrix[0]); j++ {
+			if j == len(matrix[0]) - 1 {
+				fmt.Printf("%d", matrix[i][j])
+				break
+			}
+			fmt.Printf("%d,\t", matrix[i][j])
+		}
+		if i == len(matrix) - 1 {
+			fmt.Println("},")
+			break
+		}
+		fmt.Println("},")
+	}
+	fmt.Println("}")
 }
