@@ -1,18 +1,10 @@
 package leetcode
 
-import "fmt"
+import (
+	"math"
+)
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
-type ListNode struct {
-	Val int
-	Next *ListNode
-}
+
 // 第一种普通解法
 //func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 //	head := &ListNode{}
@@ -52,7 +44,7 @@ type ListNode struct {
 //	return head
 //}
 // 递归思想
-func mergeTwoLists021_0(l1 *ListNode, l2 *ListNode) *ListNode {
+func mergeTwoLists0021_0(l1 *ListNode, l2 *ListNode) *ListNode {
 	head := &ListNode{}
 	if l1 == nil {
 		return l2
@@ -61,15 +53,16 @@ func mergeTwoLists021_0(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	if l1.Val < l2.Val {
 		head = l1
-		head.Next = mergeTwoLists021_0(l1.Next, l2)
+		head.Next = mergeTwoLists0021_0(l1.Next, l2)
 	}else {
 		head = l2
-		head.Next = mergeTwoLists021_0(l1, l2.Next)
+		head.Next = mergeTwoLists0021_0(l1, l2.Next)
 	}
 	return head
 }
 // 解法2：循环遍历，O(n) n为两个链表中最小的长度
-func mergeTwoLists021_1(l1 *ListNode, l2 *ListNode) *ListNode {
+// 申请了额外的节点，空间复杂度为O(n)
+func mergeTwoLists0021_1(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1 == nil {
 		return l2
 	}else if l2 == nil {
@@ -98,11 +91,28 @@ func mergeTwoLists021_1(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	return head
 }
-func PrintNode(l ListNode) {
-	for l.Next != nil {
-		fmt.Print(l.Val)
-		l = *l.Next
-	} // 此时获得了最后一个l节点
-	fmt.Print(l.Val)
-	fmt.Println()
+
+// 利用链表本身的节点 O(1)空间复杂度
+func mergeTwoLists0021_2(l1 *ListNode, l2 *ListNode) *ListNode {
+	head := &ListNode{}
+	curr := head
+	for l1 != nil || l2 != nil {
+		left, right := math.MaxInt32, math.MaxInt32
+		if l1 != nil {
+			left = l1.Val
+		}
+		if l2 != nil {
+			right = l2.Val
+		}
+		if left <= right {
+			curr.Next = l1
+			l1 = l1.Next
+		} else {
+			curr.Next = l2
+			l2 = l2.Next
+		}
+		curr = curr.Next
+	}
+
+	return head.Next
 }

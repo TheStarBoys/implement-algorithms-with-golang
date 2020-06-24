@@ -1,12 +1,5 @@
 package leetcode
 
- //Definition for a binary tree node.
-type TreeNode struct {
-	Val int
-	Left *TreeNode
-	Right *TreeNode
-}
-
 func GenerateTrees(n int) []*TreeNode {
 	if n == 0 {
 		return make([]*TreeNode, 0)

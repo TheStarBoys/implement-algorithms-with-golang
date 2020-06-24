@@ -2,10 +2,6 @@ package leetcode
 
 import "sort"
 
-
-
-
-
 // todo
 func findKthLargest0(nums []int, k int) int {
 	sort.Slice(nums, func(i, j int) bool {
@@ -48,6 +44,15 @@ func partition(a []int, l, h int) int {
 	return j
 }
 
-//func FindKthLagest(a []int, k int) int{
-//	return findKthLargest(a, k)
-//}
+// 冒泡排序 k 次，取nums[len(nums)-k]作为答案
+// 时间复杂度: O(N * K)
+func findKthLargest0215_2(nums []int, k int) int {
+	for i := 0; i < k; i++ {
+		for j := 1; j < len(nums) - i; j++ {
+			if nums[j-1] > nums[j] {
+				nums[j-1], nums[j] = nums[j], nums[j-1]
+			}
+		}
+	}
+	return nums[len(nums)-k]
+}

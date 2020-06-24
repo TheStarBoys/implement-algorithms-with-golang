@@ -6,7 +6,7 @@ package MI
 // str := []string{"", "abcd", "abde", "bcad", "bcadf", "bcadf", "bcda"}
 
 // 效率较高，空间浪费大
-func SortStrings(str []string, indx int) []string {
+func SortStrings001_0(str []string, indx int) []string {
 	// 'a' -> 'z' 26个字母，映射到26个桶中
 	bucket := make([][]string, 26)
 	h := 0 // 合并时的起始下标
@@ -32,7 +32,7 @@ func SortStrings(str []string, indx int) []string {
 			continue
 		}
 		// 递归的将桶里的数据也排好序
-		bucket[i] = SortStrings(bucket[i], indx+1)
+		bucket[i] = SortStrings001_0(bucket[i], indx+1)
 	}
 	// 将排序后的切片进行合并
 	for i := range bucket {
@@ -44,10 +44,10 @@ func SortStrings(str []string, indx int) []string {
 }
 
 // 新思路
-func SortStrings2(strs []string) []string {
+func SortStrings001_1(strs []string) []string {
 	for i := 0; i < len(strs) - 1; i++ {
 		for j := 1; j < len(strs) - i; j++ {
-			if isSmall(strs[j-1], strs[j]) == false {
+			if isSmall001_1(strs[j-1], strs[j]) == false {
 				strs[j-1], strs[j] = strs[j], strs[j-1]
 			}
 		}
@@ -57,7 +57,7 @@ func SortStrings2(strs []string) []string {
 }
 
 // 判断字符串 a 是否小于 b
-func isSmall(a, b string) bool {
+func isSmall001_1(a, b string) bool {
 	var i, j int
 
 	if a == "" {
@@ -94,4 +94,38 @@ func isSmall(a, b string) bool {
 	}
 
 	return false
+}
+
+// 归并排序
+func SortStrings001_2(strs []string) {
+	if len(strs) < 2 { return }
+	mid := len(strs) >> 1
+	SortStrings001_2(strs[:mid])
+	SortStrings001_2(strs[mid:])
+	merge001_2(strs)
+}
+
+func merge001_2(strs []string) {
+	mid := len(strs) >> 1
+	tmp := make([]string, len(strs))
+	left := strs[:mid]
+	right := strs[mid:]
+	indx := 0
+	i, j := 0, 0
+	for ; i < len(left) && j < len(right); indx++ {
+		if left[i] <= right[j] {
+			tmp[indx] = left[i]
+			i++
+		} else {
+			tmp[indx] = right[j]
+			j++
+		}
+	}
+	if i == len(left) {
+		copy(tmp[indx:], right[j:])
+	}
+	if j == len(right) {
+		copy(tmp[indx:], left[i:])
+	}
+	copy(strs, tmp)
 }
