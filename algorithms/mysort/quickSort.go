@@ -48,7 +48,7 @@ func partition(arr []int, p, r int) int {
 			i++
 		}
 	}
-	arr[i], arr[r] = arr[r], arr[i]
+	arr[i], arr[r] = arr[r], arr[i] // 分区点归位
 
 	return i
 }

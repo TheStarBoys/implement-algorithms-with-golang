@@ -542,6 +542,23 @@ func helper(root *TreeNode) int {
 
 
 
+### 验证二叉树是否对称
+
+```go
+func isSymmetric(root *TreeNode) bool {
+    return isMirror(root, root)
+}
+
+func isMirror(left, right *TreeNode) bool {
+    if left == nil && right == nil { return true }
+    if left == nil || right == nil { return false }
+    if left.Val != right.Val { return false }
+    return isMirror(left.Left, right.Right) && isMirror(left.Right, right.Left)
+}
+```
+
+
+
 ## 引用
 
 > [数据结构与算法之美](https://time.geekbang.org/column/intro/126)

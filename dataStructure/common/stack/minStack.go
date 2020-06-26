@@ -10,7 +10,7 @@ type MinStack struct {
 	minStack  *SliceStack // 最小栈，栈顶为当前最小值
 }
 
-// isMin() 需返回 a <= b 为true
+// isMin() 需返回 a <= b 为true，isMin() 需要包含等于的情况
 func (m *MinStack) Push(data interface{}, isMin func(a, b interface{}) bool) {
 	m.elemStack.Push(data)
 

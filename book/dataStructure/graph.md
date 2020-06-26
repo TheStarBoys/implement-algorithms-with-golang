@@ -95,7 +95,9 @@ func (g *Graph) AddEdge(s, t int) {
 }
 ```
 
-#### 图的广度优先搜索
+
+
+##### 图的广度优先搜索
 
 ```go
 func (g Graph) BFS(s, t int) []int {
@@ -159,7 +161,7 @@ func reverse(prev []int, s, t int) []int {
 
 广度优先搜索的空间消耗主要在几个辅助变量 visited 数组、queue 队列、prev 数组上。这三个存储空间的大小都不会超过顶点的个数，所以空间复杂度是 `O(V)`。 
 
-#### 图的深度优先搜索
+##### 图的深度优先搜索
 
 ```go
 func (g *Graph) DFS(s, t int) []int {
@@ -205,7 +207,7 @@ func (g *Graph) dfs(visited []bool, path []int, s, t int) (bool, []int) {
 
 深度优先搜索算法的消耗内存主要是 visited、path 数组和递归调用栈。visited、path 数组的大小跟顶点的个数 V 成正比，递归调用栈的最大深度不会超过顶点的个数，所以总的空间复杂度就是 `O(V)`。 
 
-#### 示例
+##### 示例
 
 ```go
 func TestGraph(t *testing.T) {
@@ -238,7 +240,130 @@ func TestGraph(t *testing.T) {
 }
 ```
 
+#### 有向图
 
+```go
+type DiGraph struct {
+	v int // 顶点个数
+	adj []list.List
+}
+
+func NewDirectedGraph(v int) *DiGraph {
+	return &DiGraph{
+		v: v,
+		adj: make([]list.List, v),
+	}
+}
+
+func (g *DiGraph) AddEdge(s, t int) { // s 先于 t，边 s -> t
+	if !(0 <= s && s < g.v) ||
+		!(0 <= t && t < g.v) {
+		// index out of range
+		return
+	}
+	g.adj[s].PushBack(t)
+}
+```
+
+##### 拓扑排序
+
+那什么是拓扑排序呢？这个概念很好理解，我们先来看一个生活中的拓扑排序的例子。
+
+我们在穿衣服的时候都有一定的顺序，我们可以把这种顺序想成，衣服与衣服之间有一定的依赖关系。比如说，你必须先穿袜子才能穿鞋，先穿内裤才能穿秋裤。
+
+假设我们现在有八件衣服要穿，它们之间的两两依赖关系我们已经很清楚了，那如何安排一个穿衣序列，能够满足所有的两两之间的依赖关系？这就是个拓扑排序问题。从这个例子中，你应该能想到，在很多时候，拓扑排序的序列并不是唯一的。你可以看我画的这幅图，我找到了好几种满足这些局部先后关系的穿衣序列。 
+
+ ![img](https://static001.geekbang.org/resource/image/c2/bd/c26d0f472d9a607c0c4eb688c01959bd.jpg) 
+
+弄懂了这个生活中的例子，开篇的关于编译顺序的问题，你应该也有思路了。开篇问题跟这个问题的模型是一样的，也可以抽象成一个拓扑排序问题。
+
+拓扑排序的原理非常简单，我们的重点应该放到拓扑排序的实现上面。我前面多次讲过，算法是构建在具体的数据结构之上的。针对这个问题，我们先来看下，如何将问题背景抽象成具体的数据结构？
+
+我们可以把源文件与源文件之间的依赖关系，抽象成一个有向图。每个源文件对应图中的一个顶点，源文件之间的依赖关系就是顶点之间的边。如果 a 先于 b 执行，也就是说 b 依赖于 a，那么就在顶点 a 和顶点 b 之间，构建一条从 a 指向 b 的边。而且，这个图不仅要是有向图，还要是一个有向无环图，也就是不能存在像 a->b->c->a 这样的循环依赖关系。因为图中一旦出现环，拓扑排序就无法工作了。实际上，拓扑排序本身就是基于有向无环图的一个算法。 
+
+**1.Kahn 算法**
+
+Kahn 算法实际上用的是贪心算法思想，思路非常简单、好懂。
+
+定义数据结构的时候，如果 s 需要先于 t 执行，那就添加一条 s 指向 t 的边。所以，如果某个顶点入度为 0， 也就表示，没有任何顶点必须先于这个顶点执行，那么这个顶点就可以执行了。
+
+我们先从图中，找出一个入度为 0 的顶点，将其输出到拓扑排序的结果序列中（对应代码中就是把它打印出来），并且把这个顶点从图中删除（也就是把这个顶点可达的顶点的入度都减 1）。我们循环执行上面的过程，直到所有的顶点都被输出。最后输出的序列，就是满足局部依赖关系的拓扑排序。
+
+我把 Kahn 算法用代码实现了一下，你可以结合着文字描述一块看下。不过，你应该能发现，这段代码实现更有技巧一些，并没有真正删除顶点的操作。代码中有详细的注释，你自己来看，我就不多解释了。 
+
+```go
+func (g *DiGraph) TopoSortByKahn() {
+	inDegree := make([]int, g.v) // 统计每个顶点的入度
+	for i := 0; i < g.v; i++ {
+		for e := g.adj[i].Front(); e != nil; e = e.Next() {
+			val := e.Value.(int)
+			inDegree[val]++
+		}
+	}
+	queue := []int{}
+	for i := 0; i < g.v; i++ {
+		if inDegree[i] == 0 {
+			queue = append(queue, i)
+		}
+	}
+	for len(queue) > 0 {
+		i := queue[0]
+		queue = queue[1:]
+		fmt.Printf("->%d", i)
+		for e := g.adj[i].Front(); e != nil; e = e.Next() {
+			val := e.Value.(int)
+			inDegree[val]--
+			if inDegree[val] == 0 {
+				queue = append(queue, val)
+			}
+		}
+	}
+	fmt.Println()
+}
+```
+
+**2.DFS 算法**
+
+图上的深度优先搜索我们前面已经讲过了，实际上，拓扑排序也可以用深度优先搜索来实现。不过这里的名字要稍微改下，更加确切的说法应该是深度优先遍历，遍历图中的所有顶点，而非只是搜索一个顶点到另一个顶点的路径。
+
+关于这个算法的实现原理，我先把代码贴在下面，下面给你具体解释。 
+
+```go
+func (g *DiGraph) TopoSortByDFS() {
+	// 先构建逆邻接表，边 s -> t 表示， s 依赖于 t，t 先于 s
+	inverseAdj := make([]list.List, g.v)
+	for i := 0; i < g.v; i++ { // 通过邻接表生成逆邻接表
+		for e := g.adj[i].Front(); e != nil; e = e.Next() {
+			val := e.Value.(int)
+			inverseAdj[val].PushBack(i)
+		}
+	}
+	visited := make([]bool, g.v)
+	for i := 0; i < g.v; i++ {
+		if visited[i] { continue }
+		g.dfs(i, inverseAdj, visited)
+	}
+	fmt.Println()
+}
+
+func (g *DiGraph) dfs(vertex int, inverseAdj []list.List, visited []bool) {
+	visited[vertex] = true
+	for e := inverseAdj[vertex].Front(); e != nil; e = e.Next() {
+		val := e.Value.(int)
+		if visited[val] == false {
+			g.dfs(val, inverseAdj, visited)
+		}
+	}
+	// 先把 vertex 这个顶点可达的所有顶点都打印出来之后，再打印它自己
+	fmt.Printf("->%d", vertex)
+}
+```
+
+这个算法包含两个关键部分。
+
+第一部分是**通过邻接表构造逆邻接表**。邻接表中，边 s->t 表示 s 先于 t 执行，也就是 t 要依赖 s。在逆邻接表中，边 s->t 表示 s 依赖于 t，s 后于 t 执行。为什么这么转化呢？这个跟我们这个算法的实现思想有关。
+
+第二部分是这个算法的核心，也就是**递归处理每个顶点**。对于顶点 vertex 来说，我们先输出它可达的所有顶点，也就是说，先把它依赖的所有的顶点输出了，然后再输出自己。 
 
 ## 引用
 
