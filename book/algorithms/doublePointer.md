@@ -146,7 +146,7 @@ func twoSum(numbers []int, target int) []int {
 
  
 
-### 示例
+### 示例一
 
 ------
 
@@ -158,7 +158,7 @@ func twoSum(numbers []int, target int) []int {
 
 实际上，它相当于使用了两个指针，一个用于原始数组的迭代，另一个总是指向新数组的最后一个位置。
 
-###  重新考虑空间限制
+####  重新考虑空间限制
 
 ------
 
@@ -184,6 +184,25 @@ public int removeElement(int[] nums, int val) {
 在上面的例子中，我们使用两个指针，一个快指针 `i` 和一个慢指针 `k` 。`i` 每次移动一步，而 `k` 只在添加新的被需要的值时才移动一步。
 
  
+
+### 示例二
+
+找到链表的中间节点。有两个指针，在一次迭代中，快指针总是比慢指针多走一步，最后慢指针将指向链表的中间节点。
+
+```go
+func findMiddleNode(head *ListNode) *ListNode {
+  if head == nil || head.Next == nil { return head }
+  slow, fast := head, head.Next
+  for fast != nil && fast.Next != nil {
+    fast = fast.Next.Next
+    slow = slow.Next
+  }
+  
+  return slow
+}
+```
+
+
 
 ### 总结
 

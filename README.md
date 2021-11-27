@@ -38,7 +38,7 @@
 ### 数据结构
 
 - [栈与队列](./book/dataStructure/stackAndQueue.md)
-- 链表
+- [链表](./book/dataStructure/linkedList.md)
 - [二叉树](./book/dataStructure/binaryTree.md)
 - [二叉搜索树](./book/dataStructure/binarySearchTree.md)
 - [N叉树](./book/dataStructure/n-aryTree.md)
