@@ -23,7 +23,7 @@
 
 下面是前缀树的一个例子：
 
-![img](https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/02/07/screen-shot-2018-01-31-at-163403.png)
+![img](https://img-thestarboys.oss-cn-beijing.aliyuncs.com/img/screen-shot-2018-01-31-at-163403.png)
 
 在上图示例中，我们在节点中标记的值是该节点对应表示的字符串。例如，我们从根节点开始，选择第二条路径 'b'，然后选择它的第一个子节点 'a'，接下来继续选择子节点 'd'，我们最终会到达叶节点 "bad"。节点的值是由从根节点开始，与其经过的路径中的字符按顺序形成的。
 
@@ -73,7 +73,7 @@ type TrieNode {
 }
 ```
 
- 通过相应的字符来访问特定的子节点`更为容易`。但它可能比使用数组`稍慢一些`。但是，由于我们只存储我们需要的子节点，因此`节省了空间`。这个方法也更加`灵活`，因为我们不受到固定长度和固定范围的限制。 
+通过相应的字符来访问特定的子节点`更为容易`。但它可能比使用数组`稍慢一些`。但是，由于我们只存储我们需要的子节点，因此`节省了空间`。这个方法也更加`灵活`，因为我们不受到固定长度和固定范围的限制。 
 
 ### 补充
 
@@ -112,7 +112,7 @@ type TrieNode {
 6. cur is the node which represents the string S
 ```
 
- 通常情况情况下，你需要自己构建前缀树。构建前缀树实际上就是多次调用插入函数。但请记住在插入字符串之前要 `初始化根节点` 。 
+通常情况下，你需要自己构建前缀树。构建前缀树实际上就是多次调用插入函数。但请记住在插入字符串之前要 `初始化根节点` 。 
 
 ### 在前缀树中搜索
 
@@ -144,7 +144,7 @@ type TrieNode {
 
 
 
-### 实现Trie（前缀树）
+### [实现Trie（前缀树）](https://leetcode-cn.com/problems/implement-trie-prefix-tree/)
 
 #### 题目描述
 
@@ -172,72 +172,57 @@ trie.search("app");     // 返回 true
 
 ```go
 type Trie struct {
-    children map[byte]*Trie
+    children map[rune]*Trie
     isWord bool
 }
 
 
-/** Initialize your data structure here. */
 func Constructor() Trie {
     return Trie{
-        children: make(map[byte]*Trie),
+        children: make(map[rune]*Trie),
     }
 }
 
 
-/** Inserts a word into the trie. */
 func (this *Trie) Insert(word string)  {
-    trie := this
-    for i := range word {
-        next, ok := trie.children[word[i]]
+    curr := this
+    for _, char := range word {
+        next, ok := curr.children[char]
         if !ok {
-            tmp := Constructor()
-            next = &tmp
-            trie.children[word[i]] = next
+            newNode := Constructor()
+            next = &newNode
+            curr.children[char] = next
         }
-        trie = next
+        curr = next
     }
-    trie.isWord = true
+    curr.isWord = true
 }
 
 
-/** Returns if the word is in the trie. */
 func (this *Trie) Search(word string) bool {
-    trie := this
-    for i := range word {
-        next, ok := trie.children[word[i]]
+    curr := this
+    for _, char := range word {
+        next, ok := curr.children[char]
         if !ok {
             return false
         }
-        trie = next
+        curr = next
     }
-    
-    return trie.isWord || len(trie.children) == 0
+    return curr.isWord
 }
 
 
-/** Returns if there is any word in the trie that starts with the given prefix. */
 func (this *Trie) StartsWith(prefix string) bool {
-    trie := this
-    for i := range prefix {
-        next, ok := trie.children[prefix[i]]
+    curr := this
+    for _, char := range prefix {
+        next, ok := curr.children[char]
         if !ok {
             return false
         }
-        trie = next
+        curr = next
     }
-    
     return true
 }
-
-
-/**
- * Your Trie object will be instantiated and called as such:
- * obj := Constructor();
- * obj.Insert(word);
- * param_2 := obj.Search(word);
- * param_3 := obj.StartsWith(prefix);
- */
 ```
 
 ## 实际应用Ⅰ
@@ -262,6 +247,8 @@ func (this *Trie) StartsWith(prefix string) bool {
 ```
 
 #### 代码实现
+
+方案一：正常插入，在 `sum` 的时候通过 BFS 遍历所有子节点累加，适合插入同一 key 数据频繁，而 sum 不频繁的场景。
 
 ```go
 type MapSum struct {
@@ -329,6 +316,68 @@ func (this *MapSum) Sum(prefix string) int {
  * param_2 := obj.Sum(prefix);
  */
 ```
+
+方案二：在插入数据时就累加，这样 sum 的速度会更快，适合插入同一 key 不频繁，sum 频繁的情况。
+
+```go
+type MapSum struct {
+    children map[rune]*MapSum
+    isKey bool
+    val int
+    sum int
+}
+
+
+func Constructor() MapSum {
+    return MapSum{
+        children: make(map[rune]*MapSum),
+    }
+}
+
+
+func (this *MapSum) Insert(key string, val int)  {
+    lastNode := this.update(key, val)
+    if lastNode.isKey {
+        oldVal := lastNode.val
+        lastNode.val = val
+        this.update(key, -oldVal)
+    } else {
+        lastNode.val = val
+        lastNode.isKey = true
+    }
+}
+
+
+func (this *MapSum) update(key string, val int) *MapSum {
+    curr := this
+    for _, char := range key {
+        next, ok := curr.children[char]
+        if !ok {
+            newNode := Constructor()
+            next = &newNode
+            curr.children[char] = next
+        }
+        next.sum += val
+        curr = next
+    }
+    return curr
+}
+
+
+func (this *MapSum) Sum(prefix string) int {
+    curr := this
+    for _, char := range prefix {
+        next, ok := curr.children[char]
+        if !ok {
+            return 0
+        }
+        curr = next
+    }
+    return curr.sum
+}
+```
+
+
 
 ### 单词替换
 

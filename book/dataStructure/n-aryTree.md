@@ -98,7 +98,7 @@ N叉树的层序遍历与二叉树的一致。通常，当我们在树中进行�
 
 ## 题目实战
 
-### 前序遍历
+### [前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/)
 
 #### 题目描述
 
@@ -143,7 +143,29 @@ func helper(root *Node, nums *[]int) {
 
 **方法二：迭代**
 
-### 后序遍历
+```go
+func preorder(root *Node) []int {
+    if root == nil { return nil }
+
+    res := []int{}
+    stack := []*Node{root}
+    for len(stack) != 0 {
+        curr := stack[len(stack)-1]
+        stack = stack[:len(stack)-1]
+        res = append(res, curr.Val)
+        // 逆序遍历 Children 入栈，来保证出栈是顺序的
+        for i := len(curr.Children) - 1; i >= 0; i-- {
+            child := curr.Children[i]
+            stack = append(stack, child)
+        }
+    }
+    return res
+}
+```
+
+
+
+### [后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/)
 
 #### 题目描述
 
@@ -187,7 +209,34 @@ func helper(root *Node, nums *[]int) {
 
 **方法二：迭代**
 
-### 层序遍历
+```go
+func postorder(root *Node) []int {
+    if root == nil { return nil }
+
+    res := []int{}
+    stack := []*Node{root}
+    visited := make(map[*Node]bool)
+    for len(stack) != 0 {
+        curr := stack[len(stack)-1]
+        if visited[curr] {
+            res = append(res, curr.Val)
+            stack = stack[:len(stack)-1]
+            continue
+        }
+        visited[curr] = true
+        for i := len(curr.Children) - 1; i >= 0; i-- {
+            child := curr.Children[i]
+            stack = append(stack, child)
+        }
+    }
+
+    return res
+}
+```
+
+
+
+### [层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)
 
 #### 题目描述
 
@@ -222,32 +271,29 @@ func helper(root *Node, nums *[]int) {
 
 ```go
 func levelOrder(root *Node) [][]int {
-    if root == nil {
-        return [][]int{}
-    }
-    var ans [][]int
-    level := 0
-    queue := make([]*Node, 0)
-    queue = append(queue, root)
-    for len(queue) > 0 {
+    if root == nil { return nil }
+
+    res := [][]int{}
+    queue := []*Node{root}
+    
+    for level := 0; len(queue) != 0; level++ {
         length := len(queue)
-        ans = append(ans, []int{})
+        res = append(res, []int{})
         for i := 0; i < length; i++ {
-            cur := queue[0]
+            curr := queue[0]
             queue = queue[1:]
-            ans[level] = append(ans[level], cur.Val)
-            for _, node := range cur.Children {
-                queue = append(queue, node)
+            res[level] = append(res[level], curr.Val)
+            for _, child := range curr.Children {
+                queue = append(queue, child)
             }
         }
-        level++
     }
-    
-    return ans
+
+    return res
 }
 ```
 
-### N叉树最大深度
+### [N叉树最大深度](https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/)
 
 #### 题目描述
 
@@ -274,17 +320,15 @@ func levelOrder(root *Node) [][]int {
 
 ```go
 func maxDepth(root *Node) int {
-    if root == nil {
-        return 0
-    }
-    max := 0
-    for _, node := range root.Children {
-        tmp := maxDepth(node)
-        if tmp > max {
-            max = tmp
+    if root == nil { return 0 }
+    if len(root.Children) == 0 { return 1 }
+    max := math.MinInt64
+    for _, child := range root.Children {
+        if depth := maxDepth(child); depth > max {
+            max = depth
         }
     }
-    
+
     return max + 1
 }
 ```

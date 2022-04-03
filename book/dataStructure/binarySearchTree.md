@@ -52,7 +52,7 @@ type TreeNode struct {
 
 ## 二叉搜索树中的基本操作
 
-### 验证二叉搜索树
+### [验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
 #### 题目描述
 
@@ -101,6 +101,8 @@ func isValidBST(root *TreeNode) bool {
     return isValid(root, &pre)
 }
 
+// 利用二叉搜索树的中序遍历是生序序列的特点
+// 因此中序遍历二叉搜索树时，前面遍历过的值一定大于当前节点的值
 func isValid(root *TreeNode, pre *int) bool {
     if root == nil {
         return true
@@ -229,7 +231,7 @@ func (this *BSTIterator) HasNext() bool {
 
 
 
-### 在二叉搜索树中实现搜索操作
+### [在二叉搜索树中实现搜索操作](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/submissions/)
 
 #### 题目描述
 
@@ -280,10 +282,10 @@ func (this *BSTIterator) HasNext() bool {
 
 ```go
 func searchBST(root *TreeNode, val int) *TreeNode {
-    if root == nil {
+	if root == nil {
 		return nil
 	}
-	if root.Val == val {
+  if root.Val == val {
 		return root
 	}
 	if root.Val > val {
@@ -295,7 +297,7 @@ func searchBST(root *TreeNode, val int) *TreeNode {
 
 
 
-### 在二叉搜索树中实现插入操作
+### [在二叉搜索树中实现插入操作](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
 
 #### 题目描述
 
@@ -306,7 +308,7 @@ func searchBST(root *TreeNode, val int) *TreeNode {
 例如, 
 
     给定二叉搜索树:
-    	4
+    		4
        / \
       2   7
      / \
@@ -368,7 +370,7 @@ func insertIntoBST(root *TreeNode, val int) *TreeNode {
 
 
 
-### 在二叉搜索树中实现删除操作
+### [在二叉搜索树中实现删除操作](https://leetcode-cn.com/problems/delete-node-in-a-bst/)
 
 #### 题目描述
 
@@ -451,7 +453,7 @@ func deleteNode(root *TreeNode, key int) *TreeNode {
 	if root.Val > key {
 		root.Left = deleteNode(root.Left, key)
 		return root
-		//如果当前val 小于查找数 则往右边查找
+  //如果当前val 小于查找数 则往右边查找
 	} else if root.Val < key {
 		root.Right = deleteNode(root.Right, key)
 		return root
@@ -462,7 +464,7 @@ func deleteNode(root *TreeNode, key int) *TreeNode {
 		if root.Left == nil {
 			//右节点替代
 			right := root.Right
-			//右节点为空
+			//右节点置为 nil
 			root.Right = nil
 			return right
 		}
@@ -564,6 +566,30 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
     }
     // 该结点自身就是p, q的最近公共祖先
     return root
+}
+```
+
+根据题意进行优化：
+
+```go
+func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+    // 根据题意，p、q一定存在
+    // 所以判断p、q是否各自在左、右子树中
+    if p.Val < root.Val && q.Val > root.Val ||
+        p.Val > root.Val && q.Val < root.Val {
+        return root
+    }
+    // 最近公共祖先是节点本身
+    if p == root || q == root {
+        return root
+    }
+
+    // p、q在同一颗子树中的情况
+    if p.Val < root.Val && q.Val < root.Val {
+        return lowestCommonAncestor(root.Left, p, q)
+    } else {
+        return lowestCommonAncestor(root.Right, p, q)
+    }
 }
 ```
 
