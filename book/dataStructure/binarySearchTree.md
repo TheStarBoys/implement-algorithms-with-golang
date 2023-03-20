@@ -101,8 +101,8 @@ func isValidBST(root *TreeNode) bool {
     return isValid(root, &pre)
 }
 
-// 利用二叉搜索树的中序遍历是生序序列的特点
-// 因此中序遍历二叉搜索树时，前面遍历过的值一定大于当前节点的值
+// 利用二叉搜索树的中序遍历是升序序列的特点
+// 因此中序遍历二叉搜索树时，前面遍历过的值一定小于当前节点的值
 func isValid(root *TreeNode, pre *int) bool {
     if root == nil {
         return true
